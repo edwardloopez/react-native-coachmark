@@ -32,7 +32,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-coachmark-example",
+    "example": "pnpm --filter react-native-coachmark-example",
     "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -86,10 +86,7 @@
     "react": "*",
     "react-native": "*"
   },
-  "workspaces": [
-    "example"
-  ],
-  "packageManager": "yarn@3.6.1",
+  "packageManager": "pnpm@9.15.1",
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
