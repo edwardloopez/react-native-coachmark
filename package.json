@@ -1,7 +1,7 @@
 {
   "name": "react-native-coachmark",
   "version": "0.1.0",
-  "description": "React Native CoachMark",
+  "description": "Production-grade Coach Mark / Spotlight / Product Tour library for React Native",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
@@ -11,6 +11,11 @@
       "default": "./lib/module/index.js"
     },
     "./package.json": "./package.json"
+  },
+  "pnpm": {
+    "overrides": {
+      "react-native-worklets": "0.5.1"
+    }
   },
   "files": [
     "src",
@@ -43,7 +48,14 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "coachmark",
+    "spotlight",
+    "tour",
+    "onboarding",
+    "tutorial",
+    "guide",
+    "walkthrough"
   ],
   "repository": {
     "type": "git",
@@ -83,15 +95,31 @@
     "typescript": "^5.9.2"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react": ">=17.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-svg": ">=13.0.0",
+    "react-native-reanimated": ">=3.0.0"
   },
+  "peerDependenciesMeta": {
+    "react-native-reanimated": {
+      "optional": false
+    }
+  },
+  "workspaces": [
+    "example"
+  ],
   "packageManager": "pnpm@9.15.1",
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|react-native-reanimated|react-native-svg)/)"
+    ],
+    "setupFiles": [
+      "./jest.setup.js"
     ]
   },
   "commitlint": {
