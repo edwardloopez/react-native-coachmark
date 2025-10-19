@@ -173,7 +173,6 @@ export const Tooltip: React.FC<{
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 8,

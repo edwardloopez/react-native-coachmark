@@ -24,7 +24,6 @@ const CustomTooltipWrapper: React.FC<{
   props: TooltipRenderProps;
   fallback: React.ReactElement;
 }> = ({ renderer, props, fallback }) => {
-  // Always call hooks in the same order
   if (renderer) {
     return <>{renderer(props)}</>;
   }

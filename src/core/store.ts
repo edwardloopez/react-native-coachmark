@@ -39,6 +39,10 @@ export function useCoachmarkStore(storage: StorageAdapter) {
       }
     }
 
+    if (tour.delay) {
+      await new Promise((resolve) => setTimeout(resolve, tour.delay));
+    }
+
     plugins.current.forEach((p) => p.onStart?.(tour));
     setState((s) => ({ ...s, activeTour: tour, index: 0, isActive: true }));
   };

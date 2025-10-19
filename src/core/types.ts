@@ -48,7 +48,7 @@ export type Tour = {
   key: string;
   steps: TourStep[];
   showOnce?: boolean;
-  // Global custom tooltip renderer (can be overridden per step)
+  delay?: number;
   renderTooltip?: TooltipRenderer;
 };
 

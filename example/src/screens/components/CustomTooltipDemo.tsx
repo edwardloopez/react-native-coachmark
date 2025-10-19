@@ -39,7 +39,11 @@ const GradientTooltip = ({
             <Text style={styles.gradientBackText}>← Back</Text>
           </Pressable>
         )}
-        <View style={{ flex: 1 }} />
+
+        <View
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ flex: 1 }}
+        />
         <Pressable onPress={onSkip} style={styles.gradientSkipButton}>
           <Text style={styles.gradientSkipText}>Skip</Text>
         </Pressable>
