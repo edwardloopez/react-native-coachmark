@@ -36,7 +36,6 @@ export type TourStep = {
   placement?: Placement;
   padding?: number;
   radius?: number;
-  allowPassthrough?: boolean;
   onBeforeEnter?: () => Promise<boolean | void>;
   onEnter?: () => void;
   onExit?: () => void;
