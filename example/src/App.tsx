@@ -7,8 +7,17 @@ import { HomeScreen } from './screens/HomeScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
 import { CustomTooltipsScreen } from './screens/CustomTooltipsScreen';
 import type { RootStackParamList } from './navigation/types';
+import Header from './screens/components/Header';
 
 const Stack = createStackNavigator<RootStackParamList>();
+
+function CustomTooltipsHeader() {
+  return <Header title="Custom Tooltips" />;
+}
+
+function SettingsHeader() {
+  return <Header title="Settings" />;
+}
 
 export default function App() {
   return (
@@ -39,8 +48,19 @@ export default function App() {
             <Stack.Screen
               name="CustomTooltips"
               component={CustomTooltipsScreen}
+              options={{
+                headerShown: true,
+                header: CustomTooltipsHeader,
+              }}
             />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen
+              name="Settings"
+              component={SettingsScreen}
+              options={{
+                headerShown: true,
+                header: SettingsHeader,
+              }}
+            />
           </Stack.Navigator>
           <CoachmarkOverlay />
         </NavigationContainer>

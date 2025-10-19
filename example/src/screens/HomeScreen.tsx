@@ -64,12 +64,13 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             placement: 'auto',
           },
           {
-            id: 'tour-hint',
-            title: 'You Made It!',
-            description: 'This concludes the basic tour of the app features.',
+            id: 'navigation-section',
+            title: 'More Demos',
+            description:
+              'Explore additional demo screens showcasing more features',
             shape: 'rect',
+            radius: 16,
             placement: 'top',
-            radius: 12,
           },
         ],
         { showOnce: false }
@@ -137,14 +138,17 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
               {isActive ? 'Tour in Progress...' : '🎯 Start Tour'}
             </Text>
           </Pressable>
-          <CoachmarkAnchor id="tour-hint" shape="rect" radius={12}>
-            <Text style={styles.hint}>
-              Tap to see how the coachmark library works!
-            </Text>
-          </CoachmarkAnchor>
+          <Text style={styles.hint}>
+            Tap to see how the coachmark library works!
+          </Text>
         </View>
 
-        <View style={styles.navigation}>
+        <CoachmarkAnchor
+          id="navigation-section"
+          shape="rect"
+          radius={16}
+          style={styles.navigation}
+        >
           <Text style={styles.navigationTitle}>📱 More Demos</Text>
           <Pressable
             style={styles.navButton}
@@ -158,7 +162,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
           >
             <Text style={styles.navButtonText}>Settings →</Text>
           </Pressable>
-        </View>
+        </CoachmarkAnchor>
 
         <View style={styles.features}>
           <Text style={styles.featuresTitle}>✨ Features</Text>

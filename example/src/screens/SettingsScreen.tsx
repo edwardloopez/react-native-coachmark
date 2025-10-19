@@ -3,25 +3,17 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Pressable,
   Platform,
   Switch,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   CoachmarkAnchor,
   createTour,
   useCoachmark,
 } from 'react-native-coachmark';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '../navigation/types';
 import { useEffect, useState } from 'react';
 
-type SettingsScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Settings'>;
-};
-
-export function SettingsScreen({ navigation }: SettingsScreenProps) {
+export function SettingsScreen() {
   const { start } = useCoachmark();
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
@@ -62,100 +54,87 @@ export function SettingsScreen({ navigation }: SettingsScreenProps) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
-          <Pressable
-            onPress={() => navigation.goBack()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backIcon}>←</Text>
-          </Pressable>
-          <Text style={styles.headerTitle}>Settings</Text>
-          <View style={styles.placeholder} />
-        </View>
+    <ScrollView contentContainerStyle={styles.scrollContent}>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Preferences</Text>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Preferences</Text>
-
-          <CoachmarkAnchor id="notifications-setting" shape="rect" radius={12}>
-            <View style={styles.settingItem}>
-              <View style={styles.settingLeft}>
-                <Text style={styles.settingIcon}>🔔</Text>
-                <View>
-                  <Text style={styles.settingTitle}>Notifications</Text>
-                  <Text style={styles.settingDesc}>
-                    Enable push notifications
-                  </Text>
-                </View>
-              </View>
-              <Switch
-                value={notifications}
-                onValueChange={setNotifications}
-                trackColor={{ false: '#E5E5EA', true: '#34C759' }}
-                thumbColor="#fff"
-              />
-            </View>
-          </CoachmarkAnchor>
-
-          <CoachmarkAnchor id="darkmode-setting" shape="rect" radius={12}>
-            <View style={styles.settingItem}>
-              <View style={styles.settingLeft}>
-                <Text style={styles.settingIcon}>🌙</Text>
-                <View>
-                  <Text style={styles.settingTitle}>Dark Mode</Text>
-                  <Text style={styles.settingDesc}>Switch to dark theme</Text>
-                </View>
-              </View>
-              <Switch
-                value={darkMode}
-                onValueChange={setDarkMode}
-                trackColor={{ false: '#E5E5EA', true: '#34C759' }}
-                thumbColor="#fff"
-              />
-            </View>
-          </CoachmarkAnchor>
-
-          <CoachmarkAnchor id="analytics-setting" shape="rect" radius={12}>
-            <View style={styles.settingItem}>
-              <View style={styles.settingLeft}>
-                <Text style={styles.settingIcon}>📊</Text>
-                <View>
-                  <Text style={styles.settingTitle}>Analytics</Text>
-                  <Text style={styles.settingDesc}>Help improve the app</Text>
-                </View>
-              </View>
-              <Switch
-                value={analytics}
-                onValueChange={setAnalytics}
-                trackColor={{ false: '#E5E5EA', true: '#34C759' }}
-                thumbColor="#fff"
-              />
-            </View>
-          </CoachmarkAnchor>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>About</Text>
-
-          <View style={styles.infoCard}>
-            <Text style={styles.infoTitle}>React Native Coachmark</Text>
-            <Text style={styles.infoVersion}>Version 0.1.0</Text>
-            <Text style={styles.infoDesc}>
-              A powerful and flexible coachmark/tour library for React Native
-              applications.
-            </Text>
-          </View>
-        </View>
-
-        <Pressable
-          style={styles.navButton}
-          onPress={() => navigation.navigate('Home')}
+        <CoachmarkAnchor
+          id="notifications-setting"
+          shape="rect"
+          radius={12}
+          style={styles.settingItem}
         >
-          <Text style={styles.navButtonText}>← Back to Home</Text>
-        </Pressable>
-      </ScrollView>
-    </SafeAreaView>
+          <View style={styles.settingLeft}>
+            <Text style={styles.settingIcon}>🔔</Text>
+            <View>
+              <Text style={styles.settingTitle}>Notifications</Text>
+              <Text style={styles.settingDesc}>Enable push notifications</Text>
+            </View>
+          </View>
+          <Switch
+            value={notifications}
+            onValueChange={setNotifications}
+            trackColor={{ false: '#E5E5EA', true: '#34C759' }}
+            thumbColor="#fff"
+          />
+        </CoachmarkAnchor>
+
+        <CoachmarkAnchor
+          id="darkmode-setting"
+          shape="rect"
+          radius={12}
+          style={styles.settingItem}
+        >
+          <View style={styles.settingLeft}>
+            <Text style={styles.settingIcon}>🌙</Text>
+            <View>
+              <Text style={styles.settingTitle}>Dark Mode</Text>
+              <Text style={styles.settingDesc}>Switch to dark theme</Text>
+            </View>
+          </View>
+          <Switch
+            value={darkMode}
+            onValueChange={setDarkMode}
+            trackColor={{ false: '#E5E5EA', true: '#34C759' }}
+            thumbColor="#fff"
+          />
+        </CoachmarkAnchor>
+
+        <CoachmarkAnchor
+          id="analytics-setting"
+          shape="rect"
+          radius={12}
+          style={styles.settingItem}
+        >
+          <View style={styles.settingLeft}>
+            <Text style={styles.settingIcon}>📊</Text>
+            <View>
+              <Text style={styles.settingTitle}>Analytics</Text>
+              <Text style={styles.settingDesc}>Help improve the app</Text>
+            </View>
+          </View>
+          <Switch
+            value={analytics}
+            onValueChange={setAnalytics}
+            trackColor={{ false: '#E5E5EA', true: '#34C759' }}
+            thumbColor="#fff"
+          />
+        </CoachmarkAnchor>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>About</Text>
+
+        <View style={styles.infoCard}>
+          <Text style={styles.infoTitle}>React Native Coachmark</Text>
+          <Text style={styles.infoVersion}>Version 0.1.0</Text>
+          <Text style={styles.infoDesc}>
+            A powerful and flexible coachmark/tour library for React Native
+            applications.
+          </Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
