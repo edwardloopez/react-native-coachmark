@@ -40,6 +40,8 @@
   "scripts": {
     "example": "pnpm --filter react-native-coachmark-example",
     "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
