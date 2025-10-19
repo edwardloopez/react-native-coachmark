@@ -1,4 +1,4 @@
-# @edwardloopez/react-native-coachmark
+# React Native Coachmark
 
 Beautiful, performant Coach Mark library for React Native with smooth animations, customizable tooltips, and TypeScript support. Create engaging product tours and onboarding experiences.
 
@@ -6,7 +6,7 @@ Beautiful, performant Coach Mark library for React Native with smooth animations
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <video src="./docs/demo.mov" alt="Demo" width="300" autoplay loop muted style="border-radius: 16px;" />
+  <video src="https://github.com/user-attachments/assets/662ec018-9c79-421c-99d7-19ee4281fc4a" alt="Demo" width="300" autoplay loop muted style="border-radius: 16px;" />
 </p>
 
 ## ✨ Features
@@ -323,25 +323,6 @@ const tour = createTour('analytics-tour', [
 ]);
 ```
 
-### Accessibility
-
-Built-in accessibility features:
-- ✅ Screen reader announcements
-- ✅ Reduced motion support
-- ✅ Focus management
-- ✅ Descriptive labels
-
-## 💡 Examples
-
-Run the example app to see all features in action:
-
-```bash
-git clone https://github.com/edwardloopez/react-native-coachmark.git
-cd react-native-coachmark
-pnpm install
-pnpm example ios    # or android, web
-```
-
 ## 💪 Best Practices
 
 - Keep tours **short** (3-5 steps max)
@@ -350,27 +331,13 @@ pnpm example ios    # or android, web
 - Prefer MMKV over AsyncStorage for performance
 - Memoize custom tooltips with `React.memo()`
 
-## 🗺️ Roadmap
-
-- [ ] Multiple spotlights per step
-- [ ] Arrow indicators
-- [ ] Cross-screen tours
-- [ ] Animation presets
-- [ ] Video/GIF support
-- [ ] Swipe gestures
-- [ ] Progress bar customization
-
 ## 🤝 Contributing
 
 Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## 📄 License
-
-MIT © [Edward A Lopez Mojica](https://github.com/edwardloopez)
-
 ## 🔗 Links
 
-- [npm Package](https://www.npmjs.com/package/@edwardloopez/react-native-coachmark)
+- [NPM Package](https://www.npmjs.com/package/@edwardloopez/react-native-coachmark)
 - [GitHub Repository](https://github.com/edwardloopez/react-native-coachmark)
 - [Issues](https://github.com/edwardloopez/react-native-coachmark/issues)
 
