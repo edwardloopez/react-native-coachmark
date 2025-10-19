@@ -12,6 +12,22 @@ export type AnchorRegistration = {
   getRef: () => any;
 };
 
+export type TooltipRenderProps = {
+  theme: CoachmarkTheme;
+  title?: string;
+  description?: string;
+  index: number;
+  count: number;
+  isFirst: boolean;
+  isLast: boolean;
+  onNext: () => void;
+  onBack: () => void;
+  onSkip: () => void;
+  currentStep: TourStep;
+};
+
+export type TooltipRenderer = (props: TooltipRenderProps) => React.ReactElement;
+
 export type TourStep = {
   id: ID;
   title?: string;
@@ -24,12 +40,16 @@ export type TourStep = {
   onBeforeEnter?: () => Promise<boolean | void>;
   onEnter?: () => void;
   onExit?: () => void;
+  // Custom tooltip renderer
+  renderTooltip?: TooltipRenderer;
 };
 
 export type Tour = {
   key: string;
   steps: TourStep[];
   showOnce?: boolean;
+  // Global custom tooltip renderer (can be overridden per step)
+  renderTooltip?: TooltipRenderer;
 };
 
 export type CoachmarkTheme = {

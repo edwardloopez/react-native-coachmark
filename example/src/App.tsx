@@ -7,7 +7,7 @@ import {
   Pressable,
   Platform,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import {
   CoachmarkProvider,
@@ -16,6 +16,7 @@ import {
   useCoachmark,
   createTour,
 } from 'react-native-coachmark';
+import CustomTooltipDemo from './CustomTooltipDemo';
 
 function HomeScreen() {
   const { start, isActive } = useCoachmark();
@@ -187,24 +188,27 @@ function FeatureItem({
 
 export default function App() {
   return (
-    <CoachmarkProvider
-      theme={{
-        backdropOpacity: 0.7,
-        tooltip: {
-          maxWidth: 300,
-          radius: 14,
-          bg: '#FFFFFF',
-          fg: '#1a1a1a',
-          arrowSize: 10,
-          padding: 14,
-          buttonPrimaryBg: '#007AFF',
-          buttonSecondaryBg: '#8E8E93',
-        },
-      }}
-    >
-      <HomeScreen />
-      <CoachmarkOverlay />
-    </CoachmarkProvider>
+    <SafeAreaProvider>
+      <CoachmarkProvider
+        theme={{
+          backdropOpacity: 0.7,
+          tooltip: {
+            maxWidth: 300,
+            radius: 14,
+            bg: '#FFFFFF',
+            fg: '#1a1a1a',
+            arrowSize: 10,
+            padding: 14,
+            buttonPrimaryBg: '#007AFF',
+            buttonSecondaryBg: '#8E8E93',
+          },
+        }}
+      >
+        <HomeScreen />
+        <CustomTooltipDemo />
+        <CoachmarkOverlay />
+      </CoachmarkProvider>
+    </SafeAreaProvider>
   );
 }
 
