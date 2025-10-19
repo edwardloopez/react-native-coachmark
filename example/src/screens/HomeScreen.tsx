@@ -39,6 +39,15 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             shape: 'circle',
             placement: 'bottom',
             padding: 16,
+            onBeforeEnter: async () => {
+              console.log('About to enter the add-button step');
+            },
+            onEnter: () => {
+              console.log('Entered the add-button step');
+            },
+            onExit: () => {
+              console.log('Exited the add-button step');
+            },
           },
           {
             id: 'counter-display',

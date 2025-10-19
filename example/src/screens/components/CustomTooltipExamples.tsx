@@ -114,7 +114,7 @@ export const AnimatedTooltip = (
       friction: 7,
       useNativeDriver: true,
     }).start();
-  }, [props.index, scaleAnim]); // Re-animate when step changes
+  }, [props.index, scaleAnim]);
 
   return (
     <Animated.View
