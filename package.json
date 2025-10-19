@@ -10,6 +10,7 @@
       "types": "./lib/typescript/src/index.d.ts",
       "default": "./lib/module/index.js"
     },
+    "./src": "./src/index.tsx",
     "./package.json": "./package.json"
   },
   "pnpm": {

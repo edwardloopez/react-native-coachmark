@@ -33,7 +33,7 @@ export function computeTooltipPosition(
           Math.max(cx - tooltipSize.w / 2, 12),
           screenW - tooltipSize.w - 12
         ),
-        y: target.y - gap - tooltipSize.h,
+        y: Math.max(target.y - gap - tooltipSize.h, 12),
         placement: 'top' as const,
       };
     }

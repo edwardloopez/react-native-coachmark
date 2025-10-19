@@ -12,6 +12,7 @@ export const Tooltip: React.FC<{
   onNext: () => void;
   onBack?: () => void;
   onSkip?: () => void;
+  onLayout?: (size: { width: number; height: number }) => void;
 }> = ({
   theme,
   title,
@@ -22,6 +23,7 @@ export const Tooltip: React.FC<{
   onNext,
   onBack,
   onSkip,
+  onLayout,
 }) => {
   const isLast = index === count - 1;
 
@@ -38,6 +40,10 @@ export const Tooltip: React.FC<{
           padding: theme.tooltip.padding,
         },
       ]}
+      onLayout={(e) => {
+        const { width, height } = e.nativeEvent.layout;
+        onLayout?.({ width, height });
+      }}
       accessibilityViewIsModal
     >
       {!!title && (

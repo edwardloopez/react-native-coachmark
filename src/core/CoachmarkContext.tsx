@@ -32,7 +32,8 @@ export const CoachmarkProvider: React.FC<{
 
   useEffect(() => {
     store.addPlugins(plugins);
-  }, [store, plugins]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [plugins]);
 
   return (
     <Ctx.Provider value={{ ...store, theme: mergedTheme, storage: memStorage }}>

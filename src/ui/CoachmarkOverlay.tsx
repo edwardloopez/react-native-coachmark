@@ -21,6 +21,16 @@ export const CoachmarkOverlay: React.FC = () => {
     x: -9999,
     y: -9999,
   });
+  const [tooltipSize, setTooltipSize] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
+  const [targetRect, setTargetRect] = useState<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } | null>(null);
   const opacity = useSharedValue(0);
   const { width: W, height: H } = Dimensions.get('window');
   const activeStep = state.activeTour?.steps[state.index];
@@ -60,6 +70,7 @@ export const CoachmarkOverlay: React.FC = () => {
 
       const padded = inset(rect, anchor.padding ?? 10);
       setMeasured(activeStep.id, rect);
+      setTargetRect(padded);
 
       const shape = anchor.shape ?? activeStep.shape ?? 'rect';
       const hole: Hole = {
@@ -68,17 +79,6 @@ export const CoachmarkOverlay: React.FC = () => {
         radius: anchor.radius ?? activeStep.radius,
       };
       setHoles([hole]);
-
-      const tooltipSize = { w: theme.tooltip.maxWidth, h: 120 };
-      const pos = computeTooltipPosition(
-        W,
-        H,
-        padded,
-        activeStep.placement ?? 'auto',
-        tooltipSize,
-        12
-      );
-      setTooltipPos({ x: pos.x, y: pos.y });
 
       activeStep.onEnter?.();
     }
@@ -89,18 +89,23 @@ export const CoachmarkOverlay: React.FC = () => {
       cancelled = true;
       activeStep?.onExit?.();
     };
-  }, [
-    state.index,
-    state.activeTour,
-    activeStep?.id,
-    activeStep,
-    getAnchor,
-    setMeasured,
-    theme.tooltip.maxWidth,
-    W,
-    H,
-    next,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.index, state.activeTour, activeStep?.id, W, H]);
+
+  useEffect(() => {
+    if (!targetRect || !tooltipSize || !activeStep) return;
+
+    const pos = computeTooltipPosition(
+      W,
+      H,
+      targetRect,
+      activeStep.placement ?? 'auto',
+      { w: tooltipSize.width, h: tooltipSize.height },
+      20
+    );
+
+    setTooltipPos({ x: pos.x, y: pos.y });
+  }, [targetRect, tooltipSize, W, H, activeStep]);
 
   const aStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
@@ -129,6 +134,7 @@ export const CoachmarkOverlay: React.FC = () => {
           onNext={next}
           onBack={state.index > 0 ? back : undefined}
           onSkip={() => stop('skipped')}
+          onLayout={(size) => setTooltipSize(size)}
         />
       </Animated.View>
     </Modal>

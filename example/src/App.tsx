@@ -50,8 +50,7 @@ function HomeScreen() {
             title: 'Like Feature',
             description: 'Show your appreciation by tapping the heart icon',
             shape: 'circle',
-            placement: 'bottom',
-            radius: 16,
+            placement: 'top',
           },
           {
             id: 'settings-menu',
@@ -59,6 +58,14 @@ function HomeScreen() {
             description: 'Access app settings and preferences from this menu',
             shape: 'pill',
             placement: 'auto',
+          },
+          {
+            id: 'tour-hint',
+            title: 'You Made It!',
+            description: 'This concludes the basic tour of the app features.',
+            shape: 'rect',
+            placement: 'top',
+            radius: 12,
           },
         ],
         { showOnce: false }
@@ -113,7 +120,6 @@ function HomeScreen() {
           </CoachmarkAnchor>
         </View>
 
-        {/* Start Tour Button */}
         <View style={styles.tourSection}>
           <Pressable
             style={[styles.startButton, isActive && styles.startButtonDisabled]}
@@ -124,12 +130,13 @@ function HomeScreen() {
               {isActive ? 'Tour in Progress...' : '🎯 Start Tour'}
             </Text>
           </Pressable>
-          <Text style={styles.hint}>
-            Tap to see how the coachmark library works!
-          </Text>
+          <CoachmarkAnchor id="tour-hint" shape="rect" radius={12}>
+            <Text style={styles.hint}>
+              Tap to see how the coachmark library works!
+            </Text>
+          </CoachmarkAnchor>
         </View>
 
-        {/* Feature List */}
         <View style={styles.features}>
           <Text style={styles.featuresTitle}>✨ Features</Text>
           <FeatureItem
