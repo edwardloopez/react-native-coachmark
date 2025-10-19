@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { Dimensions, Modal, Pressable, StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
   withTiming,
   useAnimatedStyle,
+  Easing,
 } from 'react-native-reanimated';
 import { useCoachmarkContext } from '../core/CoachmarkContext';
 import { measureInWindowByRef } from '../utils/measure';
-import type { Hole } from './Mask';
-import { Mask } from './Mask';
+import { AnimatedMask } from './Mask';
 import { inset } from './shapes';
 import { computeTooltipPosition } from '../utils/placement';
 import { Tooltip } from './Tooltip';
@@ -33,7 +33,6 @@ const CustomTooltipWrapper: React.FC<{
 export const CoachmarkOverlay: React.FC = () => {
   const { state, getAnchor, setMeasured, next, back, stop, theme } =
     useCoachmarkContext();
-  const [holes, setHoles] = useState<Hole[]>([]);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number }>({
     x: -9999,
     y: -9999,
@@ -50,6 +49,16 @@ export const CoachmarkOverlay: React.FC = () => {
   } | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const opacity = useSharedValue(0);
+
+  const holeX = useSharedValue(0);
+  const holeY = useSharedValue(0);
+  const holeWidth = useSharedValue(1);
+  const holeHeight = useSharedValue(1);
+  const [holeShape, setHoleShape] = useState<'rect' | 'circle' | 'pill'>(
+    'rect'
+  );
+  const [holeRadius, setHoleRadius] = useState(12);
+
   const { width: W, height: H } = Dimensions.get('window');
   const activeStep = state.activeTour?.steps[state.index];
 
@@ -96,12 +105,18 @@ export const CoachmarkOverlay: React.FC = () => {
       setTargetRect(padded);
 
       const shape = anchor.shape ?? activeStep.shape ?? 'rect';
-      const hole: Hole = {
-        rect: padded,
-        shape,
-        radius: anchor.radius ?? activeStep.radius,
-      };
-      setHoles([hole]);
+      const radius = anchor.radius ?? activeStep.radius ?? 12;
+
+      setHoleShape(shape);
+      setHoleRadius(radius);
+
+      const duration = reduceMotion ? 0 : theme.motion.durationMs;
+      const ease = Easing.out(Easing.cubic);
+
+      holeX.value = withTiming(padded.x, { duration, easing: ease });
+      holeY.value = withTiming(padded.y, { duration, easing: ease });
+      holeWidth.value = withTiming(padded.width, { duration, easing: ease });
+      holeHeight.value = withTiming(padded.height, { duration, easing: ease });
 
       activeStep.onEnter?.();
     }
@@ -154,23 +169,30 @@ export const CoachmarkOverlay: React.FC = () => {
   return (
     <Modal transparent visible animationType="none">
       <Animated.View style={[StyleSheet.absoluteFill, aStyle]}>
-        <Mask
+        <AnimatedMask
           width={W}
           height={H}
-          holes={holes}
+          holes={[
+            {
+              x: holeX,
+              y: holeY,
+              width: holeWidth,
+              height: holeHeight,
+              shape: holeShape,
+              radius: holeRadius,
+            },
+          ]}
           backdropColor={theme.backdropColor}
           backdropOpacity={theme.backdropOpacity}
         />
 
         <Pressable style={StyleSheet.absoluteFill} onPress={next} />
 
-        <View
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            position: 'absolute',
-            left: tooltipPos.x,
-            top: tooltipPos.y,
-          }}
+        <Animated.View
+          style={[
+            styles.tooltipContainer,
+            { left: tooltipPos.x, top: tooltipPos.y },
+          ]}
           onLayout={(e) => {
             const { width, height } = e.nativeEvent.layout;
             setTooltipSize({ width, height });
@@ -194,8 +216,14 @@ export const CoachmarkOverlay: React.FC = () => {
               />
             }
           />
-        </View>
+        </Animated.View>
       </Animated.View>
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  tooltipContainer: {
+    position: 'absolute',
+  },
+});
