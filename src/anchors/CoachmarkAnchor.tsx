@@ -11,7 +11,7 @@ export const CoachmarkAnchor: React.FC<
     radius?: number;
     children?: React.ReactNode;
   }
-> = ({ id, shape, padding = 10, radius = 12, children, ...rest }) => {
+> = ({ id, shape, padding, radius, children, ...rest }) => {
   const { register, unregister } = useCoachmarkContext();
   const ref = useRef<any>(null);
 
