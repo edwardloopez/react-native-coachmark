@@ -12,6 +12,7 @@ import { Mask } from './Mask';
 import { inset } from './shapes';
 import { computeTooltipPosition } from '../utils/placement';
 import { Tooltip } from './Tooltip';
+import { isReduceMotionEnabled } from '../utils/accessibility';
 
 export const CoachmarkOverlay: React.FC = () => {
   const { state, getAnchor, setMeasured, next, back, stop, theme } =
@@ -31,15 +32,21 @@ export const CoachmarkOverlay: React.FC = () => {
     width: number;
     height: number;
   } | null>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const opacity = useSharedValue(0);
   const { width: W, height: H } = Dimensions.get('window');
   const activeStep = state.activeTour?.steps[state.index];
 
   useEffect(() => {
+    isReduceMotionEnabled().then(setReduceMotion);
+  }, []);
+
+  useEffect(() => {
+    const duration = reduceMotion ? 0 : theme.motion.durationMs;
     opacity.value = withTiming(state.isActive ? 1 : 0, {
-      duration: theme.motion.durationMs,
+      duration,
     });
-  }, [opacity, state.isActive, theme.motion.durationMs]);
+  }, [opacity, state.isActive, theme.motion.durationMs, reduceMotion]);
 
   useEffect(() => {
     let cancelled = false;

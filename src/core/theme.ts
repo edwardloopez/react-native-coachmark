@@ -16,6 +16,6 @@ export const defaultTheme: CoachmarkTheme = {
   },
   motion: {
     durationMs: 280,
-    easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic
+    easing: (t) => 1 - Math.pow(1 - t, 3),
   },
 };

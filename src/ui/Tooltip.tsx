@@ -1,6 +1,18 @@
-import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  findNodeHandle,
+  AccessibilityInfo,
+} from 'react-native';
 import type { CoachmarkTheme } from '../core/types';
+import {
+  announce,
+  formatStepAnnouncement,
+  getButtonLabel,
+} from '../utils/accessibility';
 
 export const Tooltip: React.FC<{
   theme: CoachmarkTheme;
@@ -26,9 +38,27 @@ export const Tooltip: React.FC<{
   onLayout,
 }) => {
   const isLast = index === count - 1;
+  const containerRef = useRef<any>(null);
+
+  useEffect(() => {
+    const message = formatStepAnnouncement(
+      { title, description },
+      index,
+      count
+    );
+    announce(message);
+
+    if (containerRef.current) {
+      const reactTag = findNodeHandle(containerRef.current);
+      if (reactTag) {
+        AccessibilityInfo.setAccessibilityFocus(reactTag);
+      }
+    }
+  }, [index, title, description, count]);
 
   return (
     <View
+      ref={containerRef}
       style={[
         styles.container,
         {
@@ -44,7 +74,16 @@ export const Tooltip: React.FC<{
         const { width, height } = e.nativeEvent.layout;
         onLayout?.({ width, height });
       }}
+      accessible
+      accessibilityRole="alert"
+      accessibilityLabel={formatStepAnnouncement(
+        { title, description },
+        index,
+        count
+      )}
+      accessibilityLiveRegion="polite"
       accessibilityViewIsModal
+      importantForAccessibility="yes"
     >
       {!!title && (
         <Text style={[styles.title, { color: theme.tooltip.fg }]}>{title}</Text>
@@ -55,7 +94,6 @@ export const Tooltip: React.FC<{
         </Text>
       )}
 
-      {/* Progress indicator */}
       <View style={styles.progress}>
         {Array(count)
           .fill(0)
@@ -86,7 +124,11 @@ export const Tooltip: React.FC<{
               { backgroundColor: theme.tooltip.buttonSecondaryBg },
             ]}
             accessibilityRole="button"
-            accessibilityLabel="Go back"
+            accessibilityLabel={getButtonLabel('back', {
+              current: index + 1,
+              total: count,
+            })}
+            accessibilityHint="Double tap to go to the previous step"
           >
             <Text style={styles.btnText}>Back</Text>
           </Pressable>
@@ -99,7 +141,8 @@ export const Tooltip: React.FC<{
               { backgroundColor: theme.tooltip.buttonSecondaryBg },
             ]}
             accessibilityRole="button"
-            accessibilityLabel="Skip tour"
+            accessibilityLabel={getButtonLabel('skip')}
+            accessibilityHint="Double tap to exit the tour"
           >
             <Text style={styles.btnText}>Skip</Text>
           </Pressable>
@@ -111,7 +154,15 @@ export const Tooltip: React.FC<{
             { backgroundColor: theme.tooltip.buttonPrimaryBg },
           ]}
           accessibilityRole="button"
-          accessibilityLabel={isLast ? 'Finish tour' : 'Next step'}
+          accessibilityLabel={getButtonLabel(
+            isLast ? 'done' : 'next',
+            isLast ? undefined : { current: index + 1, total: count }
+          )}
+          accessibilityHint={
+            isLast
+              ? 'Double tap to complete the tour'
+              : 'Double tap to go to the next step'
+          }
         >
           <Text style={styles.btnText}>{isLast ? 'Done' : 'Next'}</Text>
         </Pressable>

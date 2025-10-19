@@ -10,13 +10,17 @@ export const memoryStorage = (): StorageAdapter => {
   };
 };
 
-// AsyncStorage adapter (optional peer dependency)
+/**
+ * AsyncStorage adapter (optional peer dependency)
+ */
 export const asyncStorage = (AsyncStorage: any): StorageAdapter => ({
   get: (k) => AsyncStorage.getItem(k),
   set: (k, v) => AsyncStorage.setItem(k, v),
 });
 
-// MMKV adapter (optional peer dependency)
+/**
+ * MMKV adapter (optional peer dependency)
+ */
 export const mmkvStorage = (mmkv: {
   getString: (k: string) => string | undefined;
   set: (k: string, v: string) => void;

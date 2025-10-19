@@ -25,7 +25,6 @@ export const Mask: React.FC<{
     })
     .join(' ');
 
-  // Even-odd fill: one big rect minus the holes path
   const fullRect = `M 0 0 H ${width} V ${height} H 0 Z`;
   const d = `${fullRect} ${holesPath}`;
 
