@@ -1,7 +1,7 @@
 {
-  "name": "react-native-coachmark",
+  "name": "@edwardloopez/react-native-coachmark",
   "version": "0.1.0",
-  "description": "Production-grade Coach Mark / Spotlight / Product Tour library for React Native",
+  "description": "Beautiful, performant Coach Mark library for React Native with smooth animations, customizable tooltips, and TypeScript support. Create engaging product tours and onboarding experiences.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
@@ -71,7 +71,8 @@
   },
   "homepage": "https://github.com/edwardloopez/react-native-coachmark#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
