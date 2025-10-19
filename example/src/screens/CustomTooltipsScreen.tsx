@@ -1,58 +1,10 @@
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
-import {
-  CoachmarkAnchor,
-  useCoachmark,
-  type TooltipRenderProps,
-} from 'react-native-coachmark';
-import {
-  MinimalTooltip,
-  CardTooltip,
-  AnimatedTooltip,
-} from './components/CustomTooltipExamples';
+import { CoachmarkAnchor, useCoachmark } from 'react-native-coachmark';
 
-const GradientTooltip = ({
-  title,
-  description,
-  index,
-  count,
-  onNext,
-  onBack,
-  onSkip,
-  isFirst,
-  isLast,
-}: TooltipRenderProps) => {
-  return (
-    <View style={styles.gradientTooltip}>
-      <View style={styles.gradientHeader}>
-        <Text style={styles.gradientBadge}>
-          {index + 1} / {count}
-        </Text>
-      </View>
-      <Text style={styles.gradientTitle}>{title}</Text>
-      <Text style={styles.gradientDesc}>{description}</Text>
-      <View style={styles.gradientActions}>
-        {!isFirst && (
-          <Pressable onPress={onBack} style={styles.gradientBackButton}>
-            <Text style={styles.gradientBackText}>← Back</Text>
-          </Pressable>
-        )}
-
-        <View
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{ flex: 1 }}
-        />
-        <Pressable onPress={onSkip} style={styles.gradientSkipButton}>
-          <Text style={styles.gradientSkipText}>Skip</Text>
-        </Pressable>
-        <Pressable onPress={onNext} style={styles.gradientNextButton}>
-          <Text style={styles.gradientNextText}>
-            {isLast ? 'Done ✓' : 'Next →'}
-          </Text>
-        </Pressable>
-      </View>
-    </View>
-  );
-};
+import { GradientTooltip } from './components/GradientTooltip';
+import { MinimalTooltip } from './components/MinimalTooltip';
+import { AnimatedTooltip } from './components/AnimatedTooltip';
+import { CardTooltip } from './components/CardTooltip';
 
 function CustomTooltipDemoContent() {
   const { start } = useCoachmark();
@@ -67,12 +19,14 @@ function CustomTooltipDemoContent() {
           title: 'Your Profile',
           description: 'Access your account settings and preferences here.',
           placement: 'bottom',
+          shape: 'circle',
         },
         {
           id: 'notifications',
           title: 'Stay Updated',
           description: 'Get notified about important updates and messages.',
           placement: 'bottom',
+          shape: 'circle',
         },
       ],
     });
@@ -88,12 +42,14 @@ function CustomTooltipDemoContent() {
           title: 'Search Feature',
           description: 'Quickly find what you need with our powerful search.',
           placement: 'bottom',
+          shape: 'circle',
         },
         {
           id: 'filter',
           title: 'Smart Filters',
           description: 'Narrow down results with advanced filtering options.',
           placement: 'bottom',
+          shape: 'circle',
         },
       ],
     });
@@ -129,13 +85,13 @@ function CustomTooltipDemoContent() {
           id: 'settings',
           title: 'Customize Settings',
           description: 'Personalize your experience with custom settings.',
-          placement: 'bottom',
+          placement: 'auto',
         },
         {
           id: 'help',
           title: 'Need Help?',
           description: 'Access our help center and support resources.',
-          placement: 'bottom',
+          placement: 'auto',
         },
       ],
     });
@@ -148,89 +104,95 @@ function CustomTooltipDemoContent() {
         Tap any button below to see different custom tooltip styles
       </Text>
 
-      {/* Demo Section 1 */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Pre-built Styles</Text>
+      <View style={styles.container}>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Pre-built Styles</Text>
 
-        <Pressable onPress={startMinimalTour} style={styles.demoButton}>
-          <Text style={styles.demoButtonText}>Minimal Tooltip</Text>
-          <Text style={styles.demoButtonDesc}>
-            Dark, clean, minimalist design
-          </Text>
-        </Pressable>
+          <Pressable onPress={startMinimalTour} style={styles.demoButton}>
+            <Text style={styles.demoButtonText}>Minimal Tooltip</Text>
+            <Text style={styles.demoButtonDesc}>
+              Dark, clean, minimalist design
+            </Text>
+          </Pressable>
 
-        <View style={styles.anchorRow}>
-          <CoachmarkAnchor id="profile">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>👤</Text>
-            </View>
-          </CoachmarkAnchor>
-          <CoachmarkAnchor id="notifications">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>🔔</Text>
-            </View>
-          </CoachmarkAnchor>
+          <View style={styles.anchorRow}>
+            <CoachmarkAnchor id="profile">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>👤</Text>
+              </View>
+            </CoachmarkAnchor>
+            <CoachmarkAnchor id="notifications">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>🔔</Text>
+              </View>
+            </CoachmarkAnchor>
+          </View>
         </View>
 
-        <Pressable onPress={startCardTour} style={styles.demoButton}>
-          <Text style={styles.demoButtonText}>Card Tooltip</Text>
-          <Text style={styles.demoButtonDesc}>
-            Modern card with progress bar
-          </Text>
-        </Pressable>
+        <View style={styles.section}>
+          <Pressable onPress={startCardTour} style={styles.demoButton}>
+            <Text style={styles.demoButtonText}>Card Tooltip</Text>
+            <Text style={styles.demoButtonDesc}>
+              Modern card with progress bar
+            </Text>
+          </Pressable>
 
-        <View style={styles.anchorRow}>
-          <CoachmarkAnchor id="search">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>🔍</Text>
-            </View>
-          </CoachmarkAnchor>
-          <CoachmarkAnchor id="filter">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>⚙️</Text>
-            </View>
-          </CoachmarkAnchor>
+          <View style={styles.anchorRow}>
+            <CoachmarkAnchor id="search">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>🔍</Text>
+              </View>
+            </CoachmarkAnchor>
+            <CoachmarkAnchor id="filter">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>⚙️</Text>
+              </View>
+            </CoachmarkAnchor>
+          </View>
         </View>
 
-        <Pressable onPress={startAnimatedTour} style={styles.demoButton}>
-          <Text style={styles.demoButtonText}>Animated Tooltip</Text>
-          <Text style={styles.demoButtonDesc}>Spring entrance animation</Text>
-        </Pressable>
+        <View style={styles.section}>
+          <Pressable onPress={startAnimatedTour} style={styles.demoButton}>
+            <Text style={styles.demoButtonText}>Animated Tooltip</Text>
+            <Text style={styles.demoButtonDesc}>Spring entrance animation</Text>
+          </Pressable>
 
-        <View style={styles.anchorRow}>
-          <CoachmarkAnchor id="favorites">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>⭐</Text>
-            </View>
-          </CoachmarkAnchor>
-          <CoachmarkAnchor id="share">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>📤</Text>
-            </View>
-          </CoachmarkAnchor>
+          <View style={styles.anchorRow}>
+            <CoachmarkAnchor id="favorites">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>⭐</Text>
+              </View>
+            </CoachmarkAnchor>
+            <CoachmarkAnchor id="share">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>📤</Text>
+              </View>
+            </CoachmarkAnchor>
+          </View>
         </View>
-      </View>
 
-      {/* Demo Section 2 */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Custom Style</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Custom Style</Text>
 
-        <Pressable onPress={startGradientTour} style={styles.demoButton}>
-          <Text style={styles.demoButtonText}>Gradient Tooltip</Text>
-          <Text style={styles.demoButtonDesc}>Custom gradient background</Text>
-        </Pressable>
+          <Pressable onPress={startGradientTour} style={styles.demoButton}>
+            <Text style={styles.demoButtonText}>Gradient Tooltip</Text>
+            <Text style={styles.demoButtonDesc}>
+              Custom gradient background
+            </Text>
+          </Pressable>
 
-        <View style={styles.anchorRow}>
-          <CoachmarkAnchor id="settings">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>⚙️</Text>
-            </View>
-          </CoachmarkAnchor>
-          <CoachmarkAnchor id="help">
-            <View style={styles.iconButton}>
-              <Text style={styles.icon}>❓</Text>
-            </View>
-          </CoachmarkAnchor>
+          <View style={styles.anchorRow}>
+            <CoachmarkAnchor id="settings">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>⚙️</Text>
+              </View>
+            </CoachmarkAnchor>
+            <CoachmarkAnchor id="help">
+              <View style={styles.iconButton}>
+                <Text style={styles.icon}>❓</Text>
+              </View>
+            </CoachmarkAnchor>
+          </View>
         </View>
       </View>
 
@@ -253,6 +215,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+    gap: 20,
   },
   content: {
     padding: 20,
@@ -274,7 +237,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 16,
     padding: 20,
-    marginBottom: 20,
     shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -306,7 +268,7 @@ const styles = StyleSheet.create({
   anchorRow: {
     flexDirection: 'row',
     gap: 12,
-    marginBottom: 20,
+    justifyContent: 'center',
   },
   iconButton: {
     width: 56,
@@ -325,6 +287,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderLeftWidth: 4,
     borderLeftColor: '#FFC107',
+    marginTop: 20,
   },
   infoTitle: {
     fontSize: 14,
@@ -336,80 +299,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#856404',
     lineHeight: 18,
-  },
-
-  gradientTooltip: {
-    maxWidth: 320,
-    padding: 20,
-    borderRadius: 16,
-    backgroundColor: '#667eea',
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 8,
-  },
-  gradientHeader: {
-    marginBottom: 12,
-  },
-  gradientBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#fff',
-  },
-  gradientTitle: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#fff',
-    marginBottom: 8,
-  },
-  gradientDesc: {
-    fontSize: 14,
-    color: '#fff',
-    opacity: 0.95,
-    lineHeight: 20,
-    marginBottom: 20,
-  },
-  gradientActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  gradientBackButton: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-  },
-  gradientBackText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-    opacity: 0.9,
-  },
-  gradientSkipButton: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-  },
-  gradientSkipText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-    opacity: 0.7,
-  },
-  gradientNextButton: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
-  },
-  gradientNextText: {
-    color: '#667eea',
-    fontSize: 14,
-    fontWeight: '700',
   },
 });

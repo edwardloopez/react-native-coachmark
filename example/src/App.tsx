@@ -35,6 +35,7 @@ export default function App() {
             buttonPrimaryBg: '#007AFF',
             buttonSecondaryBg: '#8E8E93',
           },
+          motion: { durationMs: 300, easing: (t) => t * t },
         }}
       >
         <NavigationContainer>
