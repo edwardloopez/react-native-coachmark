@@ -149,7 +149,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.startButton, styles.centerItems]}
+            style={[styles.deleteButton, styles.centerItems]}
             onPress={() => {
               storage.getAllKeys().forEach((key) => {
                 storage.delete(key);
@@ -364,6 +364,24 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         shadowColor: '#34C759',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  deleteButton: {
+    backgroundColor: '#FF3B30',
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    borderRadius: 12,
+    marginBottom: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#FF3B30',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
         shadowRadius: 8,
