@@ -1,5 +1,11 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.4.0
+
+### Minor Changes
+
+- [`ff7d165`](https://github.com/edwardloopez/react-native-coachmark/commit/ff7d16512a10ddf9cb27176759d93046c20ee4b1) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Add `scrollDelay` parameter to TourStep for smoother auto-scroll transitions. Eliminates visual jumpiness by adding a configurable delay (default: 150ms) between scroll completion and mask rendering.
+
 ## 0.3.0
 
 ### Minor Changes
