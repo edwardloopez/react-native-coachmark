@@ -7,6 +7,38 @@ import type {
   StorageAdapter,
 } from './types';
 
+/**
+ * Custom hook that manages the state and operations for a coachmark/tour system.
+ *
+ * @param storage - Storage adapter used to persist tour completion state for "show once" tours
+ *
+ * @returns An object containing:
+ * - `state`: Current coachmark state including active tour, step index, and measured anchor positions
+ * - `register`: Function to register an anchor point for coachmark positioning
+ * - `unregister`: Function to unregister an anchor point by its ID
+ * - `getAnchor`: Function to retrieve a registered anchor by its ID
+ * - `addPlugins`: Function to add plugins that hook into tour lifecycle events
+ * - `setMeasured`: Function to store measured dimensions and position for an anchor
+ * - `start`: Async function to start a tour (respects `showOnce` flag and optional delay)
+ * - `stop`: Async function to stop the active tour with a reason (completed or skipped)
+ * - `next`: Function to advance to the next step in the tour (auto-completes at end)
+ * - `back`: Function to go back to the previous step in the tour
+ *
+ * @example
+ * ```typescript
+ * const store = useCoachmarkStore(asyncStorageAdapter);
+ *
+ * // Start a tour
+ * await store.start(myTour);
+ *
+ * // Navigate steps
+ * store.next();
+ * store.back();
+ *
+ * // Stop tour
+ * await store.stop('completed');
+ * ```
+ */
 export function useCoachmarkStore(storage: StorageAdapter) {
   const anchors = useRef(new Map<string, AnchorRegistration>());
   const plugins = useRef<Plugin[]>([]);
