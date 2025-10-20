@@ -66,10 +66,6 @@ export function useCoachmarkStore(storage: StorageAdapter) {
     if (tour.showOnce) {
       const key = `coachmark:${tour.key}`;
       const seen = await storage.get(key);
-      console.log('=======>', {
-        key,
-        seen,
-      });
       if (seen === 'true') {
         return;
       }
