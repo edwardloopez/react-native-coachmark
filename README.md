@@ -6,7 +6,7 @@ Beautiful, performant Coach Mark library for React Native with smooth animations
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/662ec018-9c79-421c-99d7-19ee4281fc4a" alt="Demo" width="300" autoplay loop muted style="border-radius: 16px;" />
+  <video src="https://github.com/user-attachments/assets/abb02c27-8d33-479c-b4a1-aa7341d368d2" alt="Demo" width="300" autoplay loop muted style="border-radius: 16px;" />
 </p>
 
 ## ✨ Features
