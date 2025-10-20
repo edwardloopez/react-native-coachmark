@@ -1,9 +1,23 @@
-# React Native Coachmark
+<h1 align="center">React Native Coachmark</h1>
 
-Beautiful, performant Coach Mark library for React Native with smooth animations, customizable tooltips, and TypeScript support. Create engaging product tours and onboarding experiences.
+<p align="center">
+  Beautiful, performant Coach Mark library for React Native with smooth animations, customizable tooltips, and TypeScript support. Create engaging product tours and onboarding experiences.
+</p>
 
-[![npm version](https://img.shields.io/npm/v/@edwardloopez/react-native-coachmark.svg)](https://www.npmjs.com/package/@edwardloopez/react-native-coachmark)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <a href="https://github.com/edwardloopez/react-native-coachmark/actions/workflows/ci.yml">
+    <img src="https://github.com/edwardloopez/react-native-coachmark/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  </a>
+  <a href="https://www.npmjs.com/package/@edwardloopez/react-native-coachmark">
+    <img src="https://img.shields.io/npm/v/@edwardloopez/react-native-coachmark.svg" alt="npm version" />
+  </a>
+  <a href="https://bundlephobia.com/package/@edwardloopez/react-native-coachmark">
+    <img src="https://img.shields.io/bundlephobia/minzip/@edwardloopez/react-native-coachmark" alt="Bundle Size" />
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+  </a>
+</p>
 
 <p align="center">
   <video src="https://github.com/user-attachments/assets/abb02c27-8d33-479c-b4a1-aa7341d368d2" alt="Demo" width="300" autoplay loop muted style="border-radius: 16px;" />
