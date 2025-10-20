@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/abb02c27-8d33-479c-b4a1-aa7341d368d2" alt="Demo" width="300" autoplay loop muted style="border-radius: 16px;" />
+  <img src=".github/assets/demo.gif" alt="React Native Coachmark Demo" width="300" style="border-radius: 16px;" />
 </p>
 
 ## ✨ Features
