@@ -1,0 +1,96 @@
+name: Verify Changeset
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+jobs:
+  verify:
+    name: Verify Changeset
+    runs-on: ubuntu-latest
+
+    # Skip for dependabot and release PRs
+    if: |
+      github.actor != 'dependabot[bot]' &&
+      !startsWith(github.head_ref, 'changeset-release/')
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for Changeset Files
+        id: changeset-check
+        run: |
+          # Count changeset files (excluding README.md and config.json)
+          CHANGESET_COUNT=$(find .changeset -name "*.md" ! -name "README.md" | wc -l)
+
+          echo "count=$CHANGESET_COUNT" >> $GITHUB_OUTPUT
+
+          if [ "$CHANGESET_COUNT" -gt 0 ]; then
+            echo "✅ Found $CHANGESET_COUNT changeset(s)"
+            echo "has_changeset=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ No changeset found"
+            echo "has_changeset=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if PR touches source files
+        id: source-check
+        run: |
+          # Check if PR modifies source files that need a changeset
+          git fetch origin ${{ github.base_ref }}
+
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # Files that require a changeset
+          SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '^src/|^package\.json$' || true)
+
+          if [ -n "$SOURCE_CHANGED" ]; then
+            echo "Source files changed:"
+            echo "$SOURCE_CHANGED"
+            echo "needs_changeset=true" >> $GITHUB_OUTPUT
+          else
+            echo "No source files changed (docs, tests, config only)"
+            echo "needs_changeset=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR (if changeset missing)
+        if: steps.source-check.outputs.needs_changeset == 'true' && steps.changeset-check.outputs.has_changeset == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## ⚠️ Missing Changeset
+
+              This PR modifies source files but doesn't include a changeset.
+
+              Please add a changeset by running:
+              \`\`\`bash
+              npx changeset
+              \`\`\`
+
+              Then commit the generated file in \`.changeset/\`.
+
+              **Not sure what to write?**
+              - \`patch\` - Bug fixes, small changes
+              - \`minor\` - New features, non-breaking changes
+              - \`major\` - Breaking changes
+
+              [Learn more about changesets](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md)`
+            })
+
+      - name: Fail if changeset required but missing
+        if: steps.source-check.outputs.needs_changeset == 'true' && steps.changeset-check.outputs.has_changeset == 'false'
+        run: |
+          echo "::error::A changeset is required for this PR. Run 'npx changeset' to create one."
+          exit 1
+
+      - name: Success
+        if: steps.source-check.outputs.needs_changeset == 'false' || steps.changeset-check.outputs.has_changeset == 'true'
+        run: |
+          echo "✅ Changeset verification passed!"

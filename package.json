@@ -46,7 +46,9 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build",
-    "release": "release-it --only-version"
+    "release": "pnpm prepare && changeset publish",
+    "changeset": "changeset",
+    "version:packages": "changeset version"
   },
   "keywords": [
     "react-native",
@@ -75,6 +77,8 @@
     "access": "public"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/compat": "^1.3.2",
     "@eslint/eslintrc": "^3.3.1",
@@ -103,17 +107,14 @@
   "peerDependencies": {
     "react": ">=17.0.0",
     "react-native": ">=0.70.0",
-    "react-native-svg": ">=13.0.0",
-    "react-native-reanimated": ">=3.0.0"
+    "react-native-reanimated": ">=3.0.0",
+    "react-native-svg": ">=13.0.0"
   },
   "peerDependenciesMeta": {
     "react-native-reanimated": {
       "optional": false
     }
   },
-  "workspaces": [
-    "example"
-  ],
   "packageManager": "pnpm@9.15.1",
   "jest": {
     "preset": "react-native",

@@ -84,6 +84,42 @@ Remember to add tests for your change if possible. Run the unit tests by:
 pnpm test
 ```
 
+### Adding a Changeset
+
+**Important:** All changes that affect the public API require a changeset.
+
+After making your changes, create a changeset by running:
+
+```sh
+npx changeset
+```
+
+This will prompt you to:
+1. Select which package(s) are affected (select `@edwardloopez/react-native-coachmark`)
+2. Choose the type of change:
+   - `patch` - Bug fixes, small improvements
+   - `minor` - New features, non-breaking changes
+   - `major` - Breaking changes
+3. Write a summary describing your changes
+
+A changeset file will be created in `.changeset/`. **Commit this file with your changes.**
+
+**When to add a changeset:**
+- ✅ New features
+- ✅ Bug fixes
+- ✅ API changes
+- ✅ Performance improvements
+- ✅ Dependency updates that affect users
+
+**When NOT to add a changeset:**
+- ❌ Documentation-only changes
+- ❌ Internal refactoring (no user-facing changes)
+- ❌ Test updates
+- ❌ CI/CD changes
+- ❌ Example app changes
+
+The CI will automatically check that a changeset is present when needed.
+
 ### Commit message convention
 
 We follow the [conventional commits specification](https://www.conventionalcommits.org/en) for our commit messages:
