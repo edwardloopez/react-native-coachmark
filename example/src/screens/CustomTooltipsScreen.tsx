@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
+
 import { CoachmarkAnchor, useCoachmark } from 'react-native-coachmark';
 
 import { GradientTooltip } from './components/GradientTooltip';
@@ -6,8 +8,11 @@ import { MinimalTooltip } from './components/MinimalTooltip';
 import { AnimatedTooltip } from './components/AnimatedTooltip';
 import { CardTooltip } from './components/CardTooltip';
 
+type ScrollViewRef = React.ComponentRef<typeof ScrollView>;
+
 function CustomTooltipDemoContent() {
   const { start } = useCoachmark();
+  const scrollRef = useRef<ScrollViewRef | null>(null);
 
   const startMinimalTour = () => {
     start({
@@ -65,12 +70,20 @@ function CustomTooltipDemoContent() {
           title: 'Add to Favorites',
           description: 'Save items for quick access later.',
           placement: 'bottom',
+          shape: 'circle',
+          autoFocus: 'ifNeeded',
+          scrollPadding: 50,
+          scrollBehavior: 'smooth',
         },
         {
           id: 'share',
           title: 'Share Content',
           description: 'Share with friends and colleagues easily.',
           placement: 'bottom',
+          shape: 'circle',
+          autoFocus: 'ifNeeded',
+          scrollPadding: 50,
+          scrollBehavior: 'instant',
         },
       ],
     });
@@ -86,19 +99,28 @@ function CustomTooltipDemoContent() {
           title: 'Customize Settings',
           description: 'Personalize your experience with custom settings.',
           placement: 'auto',
+          autoFocus: 'ifNeeded',
+          scrollPadding: 50,
+          scrollBehavior: 'smooth',
         },
         {
           id: 'help',
           title: 'Need Help?',
           description: 'Access our help center and support resources.',
           placement: 'auto',
+          autoFocus: 'ifNeeded',
+          scrollPadding: 50,
+          scrollBehavior: 'instant',
+          onBeforeScroll: async () => {
+            console.log('Preparing to scroll to Help section...');
+          },
         },
       ],
     });
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <ScrollView ref={scrollRef} contentContainerStyle={styles.content}>
       <Text style={styles.mainTitle}>Custom Tooltip Demos</Text>
       <Text style={styles.subtitle}>
         Tap any button below to see different custom tooltip styles
@@ -158,12 +180,12 @@ function CustomTooltipDemoContent() {
           </Pressable>
 
           <View style={styles.anchorRow}>
-            <CoachmarkAnchor id="favorites">
+            <CoachmarkAnchor id="favorites" scrollRef={scrollRef}>
               <View style={styles.iconButton}>
                 <Text style={styles.icon}>⭐</Text>
               </View>
             </CoachmarkAnchor>
-            <CoachmarkAnchor id="share">
+            <CoachmarkAnchor id="share" scrollRef={scrollRef}>
               <View style={styles.iconButton}>
                 <Text style={styles.icon}>📤</Text>
               </View>
@@ -182,12 +204,12 @@ function CustomTooltipDemoContent() {
           </Pressable>
 
           <View style={styles.anchorRow}>
-            <CoachmarkAnchor id="settings">
+            <CoachmarkAnchor id="settings" scrollRef={scrollRef}>
               <View style={styles.iconButton}>
                 <Text style={styles.icon}>⚙️</Text>
               </View>
             </CoachmarkAnchor>
-            <CoachmarkAnchor id="help">
+            <CoachmarkAnchor id="help" scrollRef={scrollRef}>
               <View style={styles.iconButton}>
                 <Text style={styles.icon}>❓</Text>
               </View>

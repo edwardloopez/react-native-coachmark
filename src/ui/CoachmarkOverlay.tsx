@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useCoachmarkContext } from '../core/CoachmarkContext';
 import { measureInWindowByRef } from '../utils/measure';
+import { isRectVisible } from '../utils/autoScroll';
 import { AnimatedMask } from './Mask';
 import { inset } from './shapes';
 import { computeTooltipPosition } from '../utils/placement';
@@ -96,6 +97,48 @@ export const CoachmarkOverlay: React.FC = () => {
         console.warn(`[Coachmark] Ref for "${activeStep.id}" is null`);
         return;
       }
+
+      const autoFocus = activeStep.autoFocus;
+      if (autoFocus === 'ifNeeded' || autoFocus === 'always') {
+        await activeStep.onBeforeScroll?.();
+
+        if (!anchor.scrollRef?.current) {
+          console.warn(
+            `[Coachmark] autoFocus is set for step "${activeStep.id}" but no scrollRef provided in CoachmarkAnchor. ` +
+              `Please add scrollRef prop to enable auto-scrolling.`
+          );
+        } else {
+          const behavior = activeStep.scrollBehavior ?? 'smooth';
+          const padding = activeStep.scrollPadding ?? 20;
+          const force = autoFocus === 'always';
+
+          const rect = await measureInWindowByRef(ref);
+          if (cancelled) return;
+
+          const { isVisible } = isRectVisible(rect, padding);
+
+          if (!isVisible || force) {
+            const targetY = rect.y - H / 2 + rect.height / 2;
+            const scrollY = Math.max(0, targetY);
+            const animated = behavior === 'smooth';
+
+            anchor.scrollRef.current?.scrollTo?.({
+              y: scrollY,
+              animated,
+            });
+            anchor.scrollRef.current?.scrollToOffset?.({
+              offset: scrollY,
+              animated,
+            });
+
+            await new Promise((resolve) =>
+              setTimeout(resolve, animated ? 300 : 50)
+            );
+          }
+        }
+      }
+
+      if (cancelled) return;
 
       const rect = await measureInWindowByRef(ref);
       if (cancelled) return;

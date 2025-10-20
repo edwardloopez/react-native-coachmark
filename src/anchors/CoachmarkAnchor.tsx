@@ -9,9 +9,10 @@ export const CoachmarkAnchor: React.FC<
     shape?: SpotlightShape;
     padding?: number;
     radius?: number;
+    scrollRef?: React.RefObject<any>;
     children?: React.ReactNode;
   }
-> = ({ id, shape, padding, radius, children, ...rest }) => {
+> = ({ id, shape, padding, radius, scrollRef, children, ...rest }) => {
   const { register, unregister } = useCoachmarkContext();
   const ref = useRef<any>(null);
 
@@ -22,11 +23,12 @@ export const CoachmarkAnchor: React.FC<
       padding,
       radius,
       getRef: () => ref.current,
+      scrollRef,
     });
     return () => {
       unregister(id);
     };
-  }, [id, shape, padding, radius, register, unregister]);
+  }, [id, shape, padding, radius, scrollRef, register, unregister]);
 
   return (
     <View ref={ref} collapsable={false} {...rest}>

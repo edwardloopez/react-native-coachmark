@@ -10,6 +10,7 @@ export type AnchorRegistration = {
   padding?: number;
   radius?: number;
   getRef: () => any;
+  scrollRef?: React.RefObject<any>;
 };
 
 export type TooltipRenderProps = {
@@ -36,6 +37,10 @@ export type TourStep = {
   placement?: Placement;
   padding?: number;
   radius?: number;
+  autoFocus?: 'always' | 'ifNeeded';
+  scrollBehavior?: 'smooth' | 'instant';
+  scrollPadding?: number;
+  onBeforeScroll?: () => void | Promise<void>;
   onBeforeEnter?: () => Promise<boolean | void>;
   onEnter?: () => void;
   onExit?: () => void;
