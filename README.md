@@ -5,18 +5,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/edwardloopez/react-native-coachmark/actions/workflows/ci.yml">
-    <img src="https://github.com/edwardloopez/react-native-coachmark/actions/workflows/ci.yml/badge.svg" alt="CI" />
-  </a>
-  <a href="https://www.npmjs.com/package/@edwardloopez/react-native-coachmark">
-    <img src="https://img.shields.io/npm/v/@edwardloopez/react-native-coachmark.svg" alt="npm version" />
-  </a>
-  <a href="https://bundlephobia.com/package/@edwardloopez/react-native-coachmark">
-    <img src="https://img.shields.io/bundlephobia/minzip/@edwardloopez/react-native-coachmark" alt="Bundle Size" />
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
-  </a>
+  <a href="https://github.com/edwardloopez/react-native-coachmark/actions/workflows/ci.yml"><img src="https://github.com/edwardloopez/react-native-coachmark/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://www.npmjs.com/package/@edwardloopez/react-native-coachmark"><img src="https://img.shields.io/npm/v/@edwardloopez/react-native-coachmark.svg" alt="npm version" /></a>
+  <a href="https://bundlephobia.com/package/@edwardloopez/react-native-coachmark"><img src="https://img.shields.io/bundlephobia/minzip/@edwardloopez/react-native-coachmark" alt="Bundle Size" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 </p>
 
 <p align="center">
@@ -344,6 +336,14 @@ const tour = createTour('analytics-tour', [
 - Add delays for screen transitions
 - Prefer MMKV over AsyncStorage for performance
 - Memoize custom tooltips with `React.memo()`
+
+## 🌟 Showcase
+
+Using this library? [Open a PR](https://github.com/edwardloopez/react-native-coachmark/pulls) to add your app here!
+
+<!-- Add your app:
+- **[Your App Name](https://yourapp.com)** - Brief description
+-->
 
 ## 🤝 Contributing
 
