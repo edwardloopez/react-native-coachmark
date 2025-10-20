@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Pressable,
+  TouchableOpacity,
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,6 +16,7 @@ import {
 } from 'react-native-coachmark';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
+import { storage } from '../utils/const';
 
 type HomeScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -82,7 +83,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             placement: 'top',
           },
         ],
-        { showOnce: false }
+        { showOnce: true }
       )
     );
   };
@@ -94,12 +95,12 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Coachmark Demo</Text>
           <CoachmarkAnchor id="settings-menu" shape="pill" padding={8}>
-            <Pressable
+            <TouchableOpacity
               style={styles.settingsButton}
               onPress={() => navigation.navigate('Settings')}
             >
               <Text style={styles.settingsIcon}>⚙️</Text>
-            </Pressable>
+            </TouchableOpacity>
           </CoachmarkAnchor>
         </View>
 
@@ -114,12 +115,12 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
 
         <View style={styles.actionsRow}>
           <CoachmarkAnchor id="add-button" shape="circle" padding={16}>
-            <Pressable
+            <TouchableOpacity
               style={styles.actionButton}
               onPress={() => setCounter((c) => c + 1)}
             >
               <Text style={styles.actionButtonText}>+</Text>
-            </Pressable>
+            </TouchableOpacity>
           </CoachmarkAnchor>
 
           <CoachmarkAnchor
@@ -128,17 +129,17 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             padding={12}
             style={styles.centerItems}
           >
-            <Pressable
+            <TouchableOpacity
               style={[styles.likeButton, liked && styles.likeButtonActive]}
               onPress={() => setLiked((l) => !l)}
             >
               <Text style={styles.likeIcon}>{liked ? '❤️' : '🤍'}</Text>
-            </Pressable>
+            </TouchableOpacity>
           </CoachmarkAnchor>
         </View>
 
         <View style={styles.tourSection}>
-          <Pressable
+          <TouchableOpacity
             style={[styles.startButton, isActive && styles.startButtonDisabled]}
             onPress={startBasicTour}
             disabled={isActive}
@@ -146,7 +147,17 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             <Text style={styles.startButtonText}>
               {isActive ? 'Tour in Progress...' : '🎯 Start Tour'}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.startButton, styles.centerItems]}
+            onPress={() => {
+              storage.getAllKeys().forEach((key) => {
+                storage.delete(key);
+              });
+            }}
+          >
+            <Text style={styles.startButtonText}>🗑️ Delete MMKV Keys</Text>
+          </TouchableOpacity>
           <Text style={styles.hint}>
             Tap to see how the coachmark library works!
           </Text>
@@ -159,18 +170,18 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
           style={styles.navigation}
         >
           <Text style={styles.navigationTitle}>📱 More Demos</Text>
-          <Pressable
+          <TouchableOpacity
             style={styles.navButton}
             onPress={() => navigation.navigate('CustomTooltips')}
           >
             <Text style={styles.navButtonText}>Custom Tooltips →</Text>
-          </Pressable>
-          <Pressable
+          </TouchableOpacity>
+          <TouchableOpacity
             style={styles.navButton}
             onPress={() => navigation.navigate('Settings')}
           >
             <Text style={styles.navButtonText}>Settings →</Text>
-          </Pressable>
+          </TouchableOpacity>
         </CoachmarkAnchor>
 
         <View style={styles.features}>

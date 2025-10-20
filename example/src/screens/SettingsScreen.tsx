@@ -47,7 +47,7 @@ export function SettingsScreen() {
             radius: 12,
           },
         ],
-        { showOnce: true, delay: 800 }
+        { showOnce: false, delay: 800 }
       )
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps

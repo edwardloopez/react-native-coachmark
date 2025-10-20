@@ -45,6 +45,10 @@ android.iml
 #
 example/ios/Pods
 
+# Expo prebuild
+ios/
+android/
+
 # Ruby
 example/vendor/
 
