@@ -40,6 +40,7 @@ export type TourStep = {
   autoFocus?: 'always' | 'ifNeeded';
   scrollBehavior?: 'smooth' | 'instant';
   scrollPadding?: number;
+  scrollDelay?: number;
   onBeforeScroll?: () => void | Promise<void>;
   onBeforeEnter?: () => Promise<boolean | void>;
   onEnter?: () => void;

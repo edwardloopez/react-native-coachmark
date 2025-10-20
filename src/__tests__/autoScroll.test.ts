@@ -65,4 +65,46 @@ describe('autoScroll utilities', () => {
       }
     });
   });
+
+  describe('scrollDelay configuration', () => {
+    it('accepts valid scrollDelay values', () => {
+      const stepWithDelay = {
+        id: 'test',
+        scrollDelay: 200,
+        autoFocus: 'ifNeeded' as const,
+      };
+
+      expect(stepWithDelay.scrollDelay).toBe(200);
+      expect(typeof stepWithDelay.scrollDelay).toBe('number');
+    });
+
+    it('allows scrollDelay to be undefined', () => {
+      const stepWithoutDelay: {
+        id: string;
+        autoFocus: 'ifNeeded';
+        scrollDelay?: number;
+      } = {
+        id: 'test',
+        autoFocus: 'ifNeeded' as const,
+      };
+
+      expect(stepWithoutDelay.scrollDelay).toBeUndefined();
+    });
+
+    it('allows different delay values for different behaviors', () => {
+      const smoothStep = {
+        id: 'smooth',
+        scrollBehavior: 'smooth' as const,
+        scrollDelay: 200,
+      };
+
+      const instantStep = {
+        id: 'instant',
+        scrollBehavior: 'instant' as const,
+        scrollDelay: 100,
+      };
+
+      expect(smoothStep.scrollDelay).toBeGreaterThan(instantStep.scrollDelay!);
+    });
+  });
 });

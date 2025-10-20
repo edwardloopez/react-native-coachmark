@@ -74,6 +74,7 @@ function CustomTooltipDemoContent() {
           autoFocus: 'ifNeeded',
           scrollPadding: 50,
           scrollBehavior: 'smooth',
+          scrollDelay: 200, // Smooth delay after scroll
         },
         {
           id: 'share',
@@ -84,6 +85,7 @@ function CustomTooltipDemoContent() {
           autoFocus: 'ifNeeded',
           scrollPadding: 50,
           scrollBehavior: 'instant',
+          scrollDelay: 100, // Shorter delay for instant scroll
         },
       ],
     });
@@ -102,6 +104,7 @@ function CustomTooltipDemoContent() {
           autoFocus: 'ifNeeded',
           scrollPadding: 50,
           scrollBehavior: 'smooth',
+          scrollDelay: 200,
         },
         {
           id: 'help',
@@ -111,6 +114,7 @@ function CustomTooltipDemoContent() {
           autoFocus: 'ifNeeded',
           scrollPadding: 50,
           scrollBehavior: 'instant',
+          scrollDelay: 150,
           onBeforeScroll: async () => {
             console.log('Preparing to scroll to Help section...');
           },

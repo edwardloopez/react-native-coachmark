@@ -134,6 +134,11 @@ export const CoachmarkOverlay: React.FC = () => {
             await new Promise((resolve) =>
               setTimeout(resolve, animated ? 300 : 50)
             );
+
+            const scrollDelay = activeStep.scrollDelay ?? 150;
+            if (scrollDelay > 0) {
+              await new Promise((resolve) => setTimeout(resolve, scrollDelay));
+            }
           }
         }
       }
