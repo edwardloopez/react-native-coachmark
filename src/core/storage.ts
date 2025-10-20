@@ -12,7 +12,7 @@ import type { StorageAdapter } from './types';
  * ```typescript
  * const storage = memoryStorage();
  * await storage.set('key', 'value');
- * const value = await storage.get('key'); // Returns 'value'
+ * const value = await storage.get('key');
  * ```
  */
 export const memoryStorage = (): StorageAdapter => {

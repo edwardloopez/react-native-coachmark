@@ -74,7 +74,6 @@ describe('defaultTheme', () => {
 
     expect(customTheme.backdropColor).toBe('#FF0000');
     expect(customTheme.backdropOpacity).toBe(0.8);
-    // Original properties should still exist
     expect(customTheme.tooltip.bg).toBe(defaultTheme.tooltip.bg);
   });
 
@@ -90,7 +89,6 @@ describe('defaultTheme', () => {
 
     expect(partialTheme.tooltip.bg).toBe('#FF5733');
     expect(partialTheme.tooltip.radius).toBe(20);
-    // Other tooltip properties unchanged
     expect(partialTheme.tooltip.fg).toBe(defaultTheme.tooltip.fg);
     expect(partialTheme.tooltip.padding).toBe(defaultTheme.tooltip.padding);
   });

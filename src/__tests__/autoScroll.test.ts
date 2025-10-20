@@ -29,7 +29,7 @@ describe('autoScroll utilities', () => {
     });
 
     it('returns false when rect is below visible area', () => {
-      const screenHeight = 812; // From mock
+      const screenHeight = 812;
       const rect = { x: 100, y: screenHeight - 10, width: 100, height: 50 };
       const result = isRectVisible(rect, 20);
 
@@ -38,7 +38,7 @@ describe('autoScroll utilities', () => {
     });
 
     it('calculates scroll position to center the element', () => {
-      const screenHeight = 812; // From mock
+      const screenHeight = 812;
       const rect = { x: 100, y: screenHeight + 100, width: 100, height: 50 };
       const result = isRectVisible(rect, 20);
 

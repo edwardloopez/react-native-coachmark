@@ -32,13 +32,11 @@ describe('CoachmarkProvider', () => {
   });
 
   it('should throw error when useCoachmarkContext is used outside provider', () => {
-    // Context hook should throw when used outside provider
     const TestComponent = () => {
       useCoachmarkContext();
       return null;
     };
 
-    // Suppress console error for this expected error
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
     try {
