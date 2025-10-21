@@ -1,5 +1,13 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.4.1
+
+### Patch Changes
+
+- [`cf793d1`](https://github.com/edwardloopez/react-native-coachmark/commit/cf793d1d652cba4bbbd53bb9bfa8d970144d507f) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Fix monorepo setup with PNPM workspace configuration
+
+- [`3b36f54`](https://github.com/edwardloopez/react-native-coachmark/commit/3b36f5498c7999c675059d3129aa0ff565a1cd37) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Fix Android coordinate alignment with StatusBar offset
+
 ## 0.4.0
 
 ### Minor Changes
