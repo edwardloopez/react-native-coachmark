@@ -6,7 +6,7 @@ import {
   CoachmarkProvider,
   CoachmarkOverlay,
   mmkvStorage,
-} from 'react-native-coachmark';
+} from '@edwardloopez/react-native-coachmark';
 import { HomeScreen } from './screens/HomeScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
 import { CustomTooltipsScreen } from './screens/CustomTooltipsScreen';

@@ -13,7 +13,7 @@ import {
   CoachmarkAnchor,
   useCoachmark,
   createTour,
-} from 'react-native-coachmark';
+} from '@edwardloopez/react-native-coachmark';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
 import { storage } from '../utils/const';

@@ -1,7 +1,10 @@
 import { useRef } from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 
-import { CoachmarkAnchor, useCoachmark } from 'react-native-coachmark';
+import {
+  CoachmarkAnchor,
+  useCoachmark,
+} from '@edwardloopez/react-native-coachmark';
 
 import { GradientTooltip } from './components/GradientTooltip';
 import { MinimalTooltip } from './components/MinimalTooltip';

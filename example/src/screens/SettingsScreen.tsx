@@ -10,7 +10,7 @@ import {
   CoachmarkAnchor,
   createTour,
   useCoachmark,
-} from 'react-native-coachmark';
+} from '@edwardloopez/react-native-coachmark';
 import { useEffect, useState } from 'react';
 
 export function SettingsScreen() {

@@ -15,14 +15,8 @@ const config = getDefaultConfig(projectRoot);
 config.watchFolders = [monorepoRoot];
 
 config.resolver.nodeModulesPaths = [
-  path.resolve(monorepoRoot, 'node_modules'),
   path.resolve(projectRoot, 'node_modules'),
+  path.resolve(monorepoRoot, 'node_modules'),
 ];
-
-config.resolver.extraNodeModules = {
-  'react-native-coachmark': path.resolve(monorepoRoot, 'src'),
-};
-
-config.resolver.unstable_enablePackageExports = true;
 
 module.exports = config;
