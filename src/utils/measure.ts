@@ -1,3 +1,4 @@
+import { Platform, StatusBar } from 'react-native';
 import type { Rect } from '../core/types';
 
 export function measureInWindowByRef(ref: any): Promise<Rect> {
@@ -8,7 +9,20 @@ export function measureInWindowByRef(ref: any): Promise<Rect> {
     }
     ref.measureInWindow(
       (x: number, y: number, width: number, height: number) => {
-        resolve({ x, y, width, height });
+        // On Android, measureInWindow excludes StatusBar but Modal includes it
+        // So we need to ADD the StatusBar height to Y coordinate
+        // Round up to avoid subpixel alignment issues
+        const statusBarHeight =
+          Platform.OS === 'android'
+            ? Math.ceil(StatusBar.currentHeight || 0)
+            : 0;
+
+        resolve({
+          x,
+          y: y + statusBarHeight,
+          width,
+          height,
+        });
       }
     );
   });
