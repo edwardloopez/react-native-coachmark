@@ -1,3 +1,4 @@
-packages:
-  - '.'
-  - 'example'
+# Disabled - using direct file reference instead
+# packages:
+#   - '.'
+#   - 'example'
