@@ -4,11 +4,13 @@ import { useCoachmark } from '../hooks/useCoachmark';
 import { Text, View } from 'react-native';
 import type { Tour, TourStep } from '../core/types';
 import { memoryStorage } from '../core/storage';
+import type { StorageAdapter } from '../core/types';
 
 describe('useCoachmark', () => {
-  const mockStorage = memoryStorage();
+  let mockStorage: StorageAdapter;
 
   beforeEach(() => {
+    mockStorage = memoryStorage();
     jest.clearAllMocks();
   });
 
