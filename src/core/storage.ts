@@ -32,7 +32,7 @@ export const memoryStorage = (): StorageAdapter => {
  * @returns A StorageAdapter object with get and set methods
  *
  * @example
- * ```javascript
+ * ```typescript
  * import AsyncStorage from '@react-native-async-storage/async-storage';
  * import { asyncStorage } from '@edwardloopez/react-native-coachmark';
  *
@@ -60,7 +60,7 @@ export const asyncStorage = (AsyncStorage: any): StorageAdapter => ({
  * @returns A `StorageAdapter` instance with async get and set methods
  *
  * @example
- * ```javascript
+ * ```typescript
  * import { mmkvStorage } from '@edwardloopez/react-native-coachmark';
  * import { MMKV } from 'react-native-mmkv';
  *
