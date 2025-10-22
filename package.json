@@ -39,8 +39,7 @@
   ],
   "scripts": {
     "example": "pnpm --filter react-native-coachmark-example",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --coverage",
     "test:watch": "jest --watch",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",

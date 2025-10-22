@@ -9,7 +9,7 @@ import type { StorageAdapter } from './types';
  * @returns {StorageAdapter} A storage adapter with get and set methods for managing key-value pairs in memory.
  *
  * @example
- * ```typescript
+ * ```javascript
  * const storage = memoryStorage();
  * await storage.set('key', 'value');
  * const value = await storage.get('key');

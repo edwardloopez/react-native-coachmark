@@ -16,25 +16,6 @@ describe('CoachmarkAnchor', () => {
     expect(getByText('Anchor Content')).toBeTruthy();
   });
 
-  it('should require id prop', () => {
-    const consoleError = jest.spyOn(console, 'error').mockImplementation();
-
-    try {
-      render(
-        <CoachmarkProvider>
-          {/* @ts-expect-error - Testing missing required prop */}
-          <CoachmarkAnchor>
-            <Text>Content</Text>
-          </CoachmarkAnchor>
-        </CoachmarkProvider>
-      );
-    } catch (error) {
-      // Expected to fail
-    }
-
-    consoleError.mockRestore();
-  });
-
   it('should accept shape prop', () => {
     const { getByTestId } = render(
       <CoachmarkProvider>
