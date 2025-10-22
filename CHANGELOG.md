@@ -1,5 +1,11 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.4.2
+
+### Patch Changes
+
+- [#5](https://github.com/edwardloopez/react-native-coachmark/pull/5) [`873d562`](https://github.com/edwardloopez/react-native-coachmark/commit/873d562171de5bf93463d96f2346c94676949f62) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Improve test coverage to 99% - added comprehensive tests for useCoachmark hook and CoachmarkAnchor component
+
 ## 0.4.1
 
 ### Patch Changes
