@@ -19,4 +19,16 @@ config.resolver.nodeModulesPaths = [
   path.resolve(monorepoRoot, 'node_modules'),
 ];
 
+// Resolve the library directly from source for live development
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  if (moduleName === '@edwardloopez/react-native-coachmark') {
+    return {
+      filePath: path.resolve(monorepoRoot, 'src/index.tsx'),
+      type: 'sourceFile',
+    };
+  }
+  // Use default resolver for everything else
+  return context.resolveRequest(context, moduleName, platform);
+};
+
 module.exports = config;
