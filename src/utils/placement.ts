@@ -1,5 +1,36 @@
 import type { Placement, Rect } from '../core/types';
 
+type TooltipPosition = {
+  x: number;
+  y: number;
+  placement: 'top' | 'bottom' | 'left' | 'right';
+};
+
+/**
+ * Computes the optimal position for a tooltip relative to a target element.
+ *
+ * This function calculates the best position for a tooltip based on available screen space,
+ * attempting to place it according to the specified placement preference. If the preferred
+ * placement doesn't fit, it will try alternative placements (when using 'auto' mode) or
+ * fallback to bottom placement with adjustments to fit within screen bounds.
+ *
+ * @param screenW - The width of the screen in pixels
+ * @param screenH - The height of the screen in pixels
+ * @param target - The rectangle dimensions and position of the target element
+ * @param placement - The preferred placement direction ('auto', 'top', 'bottom', 'left', 'right')
+ * @param tooltipSize - An object containing the width (w) and height (h) of the tooltip
+ * @param gap - The spacing between the tooltip and target element in pixels (default: 12)
+ *
+ * @returns An object containing:
+ *   - x: The horizontal position of the tooltip
+ *   - y: The vertical position of the tooltip
+ *   - placement: The final placement direction used ('top' | 'bottom' | 'left' | 'right')
+ *
+ * @remarks
+ * - When placement is 'auto', the function tries placements in order: bottom, top, right, left
+ * - The tooltip is automatically adjusted to stay within screen bounds with a 12px margin
+ * - If no placement fits perfectly, defaults to bottom placement with position adjustments
+ */
 export function computeTooltipPosition(
   screenW: number,
   screenH: number,
@@ -7,7 +38,7 @@ export function computeTooltipPosition(
   placement: Placement,
   tooltipSize: { w: number; h: number },
   gap = 12
-) {
+): TooltipPosition {
   const cx = target.x + target.width / 2;
   const cy = target.y + target.height / 2;
   const pref: Placement[] =
