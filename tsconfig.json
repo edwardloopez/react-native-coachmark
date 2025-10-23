@@ -33,5 +33,9 @@
     "target": "ESNext",
     "verbatimModuleSyntax": true
   },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "exclude": [
+    "node_modules",
+    "example"
+  ]
 }
