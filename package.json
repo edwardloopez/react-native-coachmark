@@ -1,6 +1,6 @@
 {
   "name": "@edwardloopez/react-native-coachmark",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Beautiful, performant Coach Mark library for React Native with smooth animations, customizable tooltips, and TypeScript support. Create engaging product tours and onboarding experiences.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
