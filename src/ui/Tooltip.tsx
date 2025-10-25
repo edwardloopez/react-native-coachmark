@@ -6,6 +6,7 @@ import {
   View,
   findNodeHandle,
   AccessibilityInfo,
+  Platform,
 } from 'react-native';
 import type { CoachmarkTheme } from '../core/types';
 import {
@@ -48,7 +49,7 @@ export const Tooltip: React.FC<{
     );
     announce(message);
 
-    if (containerRef.current) {
+    if (containerRef.current && Platform.OS !== 'web') {
       const reactTag = findNodeHandle(containerRef.current);
       if (reactTag) {
         AccessibilityInfo.setAccessibilityFocus(reactTag);
