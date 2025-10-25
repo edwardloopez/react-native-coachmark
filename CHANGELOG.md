@@ -1,5 +1,18 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.4.4
+
+### Patch Changes
+
+- [#9](https://github.com/edwardloopez/react-native-coachmark/pull/9) [`e7cc340`](https://github.com/edwardloopez/react-native-coachmark/commit/e7cc34008b9cb20d69eff35b1e3c3cf096f8ff10) Thanks [@edwardloopez](https://github.com/edwardloopez)! - ## Documentation and Configuration Improvements
+  - **Documentation**: Reorganized README into modular structure with dedicated docs folder (ADVANCED_USAGE.md, EXAMPLES.md, ACCESSIBILITY.md, BEST_PRACTICES.md)
+  - **API Reference**: Converted props and options to table format for better readability
+  - **Web Support**: Fixed `findNodeHandle` and ScrollView compatibility issues on web platform
+  - **Import Organization**: Added ESLint import ordering with React/React Native prioritization
+  - **Path Aliases**: Configured TypeScript and Babel path aliases (@core, @ui, @utils, @anchors) for cleaner imports
+  - **Build Configuration**: Added `cardStyle: { flex: 1 }` to Stack Navigator for proper web layout
+  - **Git Hooks**: Enhanced lefthook to auto-fix ESLint issues on pre-commit
+
 ## 0.4.3
 
 ### Patch Changes
