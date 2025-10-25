@@ -1,13 +1,11 @@
 import { Text, View } from 'react-native';
 
-import { render, waitFor, act } from '@testing-library/react-native';
+import { render, act, waitFor } from '@testing-library/react-native';
 
-import { CoachmarkProvider } from '@core/CoachmarkContext';
-import { memoryStorage } from '@core/storage';
-import type { Tour, TourStep } from '@core/types';
-import type { StorageAdapter } from '@core/types';
-
-import { useCoachmark } from '@hooks/useCoachmark';
+import { CoachmarkProvider } from '../core/CoachmarkContext';
+import { memoryStorage } from '../core/storage';
+import type { Tour, TourStep, StorageAdapter } from '../core/types';
+import { useCoachmark } from '../hooks/useCoachmark';
 
 describe('useCoachmark', () => {
   let mockStorage: StorageAdapter;

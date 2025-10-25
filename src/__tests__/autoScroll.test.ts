@@ -1,4 +1,4 @@
-import { isRectVisible } from '@utils/autoScroll';
+import { isRectVisible } from '../utils/autoScroll';
 
 jest.mock('react-native', () => ({
   Dimensions: {

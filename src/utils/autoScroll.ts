@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 
-import type { Rect } from '@core/types';
+import type { Rect } from '../core/types';
 
 /**
  * Checks if a rectangle is fully visible within the screen viewport, considering padding.

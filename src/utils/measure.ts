@@ -1,6 +1,6 @@
 import { Platform, StatusBar } from 'react-native';
 
-import type { Rect } from '@core/types';
+import type { Rect } from '../core/types';
 
 /**
  * Measures the position and dimensions of a component relative to the window.

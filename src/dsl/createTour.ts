@@ -1,4 +1,4 @@
-import type { Tour, TourStep } from '@core/types';
+import type { Tour, TourStep } from '../core/types';
 
 /**
  * Creates a tour configuration object with the specified steps and options.

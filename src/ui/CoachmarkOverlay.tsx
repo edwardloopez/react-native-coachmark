@@ -9,13 +9,12 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 
-import { useCoachmarkContext } from '@core/CoachmarkContext';
-import type { TooltipRenderProps, TooltipRenderer } from '@core/types';
-
-import { isReduceMotionEnabled } from '@utils/accessibility';
-import { isRectVisible } from '@utils/autoScroll';
-import { measureInWindowByRef } from '@utils/measure';
-import { computeTooltipPosition } from '@utils/placement';
+import { useCoachmarkContext } from '../core/CoachmarkContext';
+import type { TooltipRenderProps, TooltipRenderer } from '../core/types';
+import { isReduceMotionEnabled } from '../utils/accessibility';
+import { isRectVisible } from '../utils/autoScroll';
+import { measureInWindowByRef } from '../utils/measure';
+import { computeTooltipPosition } from '../utils/placement';
 
 import { AnimatedMask } from './Mask';
 import { inset } from './shapes';

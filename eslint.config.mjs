@@ -28,22 +28,6 @@ export default defineConfig([
   {
     files: ['**/*.{js,ts,jsx,tsx}'],
     plugins: { import: importPlugin },
-    settings: {
-      'import/resolver': {
-        'babel-module': {
-          root: ['./src'],
-          alias: {
-            '@': './src',
-            '@core': './src/core',
-            '@dsl': './src/dsl',
-            '@hooks': './src/hooks',
-            '@ui': './src/ui',
-            '@utils': './src/utils',
-            '@anchors': './src/anchors',
-          },
-        },
-      },
-    },
     rules: {
       'import/order': [
         'error',
@@ -65,41 +49,6 @@ export default defineConfig([
             {
               pattern: 'react-native',
               group: 'external',
-              position: 'before',
-            },
-            {
-              pattern: '@/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@core/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@dsl/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@hooks/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@ui/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@utils/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@anchors/**',
-              group: 'internal',
               position: 'before',
             },
           ],

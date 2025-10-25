@@ -1,4 +1,4 @@
-import { memoryStorage, asyncStorage, mmkvStorage } from '@core/storage';
+import { memoryStorage, asyncStorage, mmkvStorage } from '../core/storage';
 
 describe('Storage Adapters', () => {
   describe('memoryStorage', () => {

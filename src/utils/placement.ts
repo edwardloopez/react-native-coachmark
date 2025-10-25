@@ -1,4 +1,4 @@
-import type { Placement, Rect } from '@core/types';
+import type { Placement, Rect } from '../core/types';
 
 type TooltipPosition = {
   x: number;

@@ -1,4 +1,4 @@
-import type { Rect } from '@core/types';
+import type { Rect } from '../core/types';
 
 /**
  * Expands a rectangle by adding padding on all sides.

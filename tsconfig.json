@@ -3,14 +3,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "react-native-coachmark": ["./src/index"],
-      "@/*": ["./src/*"],
-      "@core/*": ["./src/core/*"],
-      "@dsl/*": ["./src/dsl/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@ui/*": ["./src/ui/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@anchors/*": ["./src/anchors/*"]
+      "react-native-coachmark": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
