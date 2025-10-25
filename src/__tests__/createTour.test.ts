@@ -1,5 +1,6 @@
-import { createTour } from '../dsl/createTour';
-import type { TourStep } from '../core/types';
+import type { TourStep } from '@core/types';
+
+import { createTour } from '@dsl/createTour';
 
 describe('createTour', () => {
   const mockSteps: TourStep[] = [

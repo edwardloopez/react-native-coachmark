@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Text,
   View,
@@ -6,12 +8,12 @@ import {
   Platform,
   Switch,
 } from 'react-native';
+
 import {
   CoachmarkAnchor,
   createTour,
   useCoachmark,
 } from '@edwardloopez/react-native-coachmark';
-import { useEffect, useState } from 'react';
 
 export function SettingsScreen() {
   const { start } = useCoachmark();

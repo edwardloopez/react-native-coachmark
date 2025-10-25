@@ -1,4 +1,4 @@
-import { defaultTheme } from '../core/theme';
+import { defaultTheme } from '@core/theme';
 
 describe('defaultTheme', () => {
   it('should have backdrop properties', () => {

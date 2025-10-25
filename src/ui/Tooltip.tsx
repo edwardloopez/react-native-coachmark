@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+
 import {
   Pressable,
   StyleSheet,
@@ -6,26 +7,51 @@ import {
   View,
   findNodeHandle,
   AccessibilityInfo,
+  Platform,
 } from 'react-native';
-import type { CoachmarkTheme } from '../core/types';
+
+import type { TooltipProps } from '@core/types';
+
 import {
   announce,
   formatStepAnnouncement,
   getButtonLabel,
-} from '../utils/accessibility';
+} from '@utils/accessibility';
 
-export const Tooltip: React.FC<{
-  theme: CoachmarkTheme;
-  title?: string;
-  description?: string;
-  pos: { x: number; y: number };
-  index: number;
-  count: number;
-  onNext: () => void;
-  onBack?: () => void;
-  onSkip?: () => void;
-  onLayout?: (size: { width: number; height: number }) => void;
-}> = ({
+/**
+ * A tooltip component that displays step-by-step guidance in a coachmark tour.
+ *
+ * @remarks
+ * This component renders a positioned tooltip with title, description, progress indicators,
+ * and navigation buttons. It includes comprehensive accessibility support with screen reader
+ * announcements and focus management.
+ *
+ * @param theme - Theme configuration for styling the tooltip
+ * @param title - Optional title text displayed at the top of the tooltip
+ * @param description - Optional description text providing additional context
+ * @param pos - Position coordinates {x, y} for absolute positioning of the tooltip
+ * @param index - Zero-based index of the current step in the tour
+ * @param count - Total number of steps in the tour
+ * @param onNext - Callback function invoked when the Next/Done button is pressed
+ * @param onBack - Optional callback function invoked when the Back button is pressed
+ * @param onSkip - Optional callback function invoked when the Skip button is pressed
+ * @param onLayout - Optional callback invoked when the tooltip layout is measured, receives width and height
+ *
+ * @example
+ * ```tsx
+ * <Tooltip
+ *   theme={myTheme}
+ *   title="Welcome"
+ *   description="This is your first step"
+ *   pos={{ x: 100, y: 200 }}
+ *   index={0}
+ *   count={5}
+ *   onNext={() => console.log('Next step')}
+ *   onSkip={() => console.log('Skip tour')}
+ * />
+ * ```
+ */
+export const Tooltip: React.FC<TooltipProps> = ({
   theme,
   title,
   description,
@@ -48,7 +74,7 @@ export const Tooltip: React.FC<{
     );
     announce(message);
 
-    if (containerRef.current) {
+    if (containerRef.current && Platform.OS !== 'web') {
       const reactTag = findNodeHandle(containerRef.current);
       if (reactTag) {
         AccessibilityInfo.setAccessibilityFocus(reactTag);

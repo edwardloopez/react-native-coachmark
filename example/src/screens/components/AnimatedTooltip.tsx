@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
+
 import type { TooltipRenderProps } from '@edwardloopez/react-native-coachmark';
 
 export const AnimatedTooltip = (

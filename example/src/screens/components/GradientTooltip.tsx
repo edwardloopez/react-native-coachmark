@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import type { TooltipRenderProps } from '@edwardloopez/react-native-coachmark';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const GradientTooltip = ({
   title,

@@ -1,17 +1,18 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import {
   CoachmarkProvider,
   CoachmarkOverlay,
   mmkvStorage,
 } from '@edwardloopez/react-native-coachmark';
-import { HomeScreen } from './screens/HomeScreen';
-import { SettingsScreen } from './screens/SettingsScreen';
-import { CustomTooltipsScreen } from './screens/CustomTooltipsScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import type { RootStackParamList } from './navigation/types';
 import Header from './screens/components/Header';
+import { CustomTooltipsScreen } from './screens/CustomTooltipsScreen';
+import { HomeScreen } from './screens/HomeScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
 import { storage } from './utils/const';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -49,6 +50,7 @@ export default function App() {
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
+              cardStyle: { flex: 1 },
             }}
           >
             <Stack.Screen name="Home" component={HomeScreen} />
