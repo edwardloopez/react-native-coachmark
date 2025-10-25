@@ -94,3 +94,16 @@ export type Plugin = {
   onStep?: (tour: Tour, index: number, step: TourStep) => void;
   onFinish?: (tour: Tour, reason: 'completed' | 'skipped') => void;
 };
+
+export type TooltipProps = {
+  theme: CoachmarkTheme;
+  title?: string;
+  description?: string;
+  pos: { x: number; y: number };
+  index: number;
+  count: number;
+  onNext: () => void;
+  onBack?: () => void;
+  onSkip?: () => void;
+  onLayout?: (size: { width: number; height: number }) => void;
+};
