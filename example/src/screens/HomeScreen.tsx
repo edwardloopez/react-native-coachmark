@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   scrollContent: {
-    flex: 1,
     padding: 20,
   },
   header: {
