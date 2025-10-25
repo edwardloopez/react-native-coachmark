@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+
 import { View, type ViewProps } from 'react-native';
+
 import { useCoachmarkContext } from '../core/CoachmarkContext';
 import type { SpotlightShape } from '../core/types';
 

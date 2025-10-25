@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 
 import {
@@ -6,10 +7,10 @@ import {
   useCoachmark,
 } from '@edwardloopez/react-native-coachmark';
 
-import { GradientTooltip } from './components/GradientTooltip';
-import { MinimalTooltip } from './components/MinimalTooltip';
 import { AnimatedTooltip } from './components/AnimatedTooltip';
 import { CardTooltip } from './components/CardTooltip';
+import { GradientTooltip } from './components/GradientTooltip';
+import { MinimalTooltip } from './components/MinimalTooltip';
 
 type ScrollViewRef = React.ComponentRef<typeof ScrollView>;
 

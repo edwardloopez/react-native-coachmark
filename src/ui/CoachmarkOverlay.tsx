@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
+
 import { Dimensions, Modal, Pressable, StyleSheet } from 'react-native';
+
 import Animated, {
   useSharedValue,
   withTiming,
   useAnimatedStyle,
   Easing,
 } from 'react-native-reanimated';
+
 import { useCoachmarkContext } from '../core/CoachmarkContext';
-import { measureInWindowByRef } from '../utils/measure';
+import type { TooltipRenderProps, TooltipRenderer } from '../core/types';
+import { isReduceMotionEnabled } from '../utils/accessibility';
 import { isRectVisible } from '../utils/autoScroll';
+import { measureInWindowByRef } from '../utils/measure';
+import { computeTooltipPosition } from '../utils/placement';
+
 import { AnimatedMask } from './Mask';
 import { inset } from './shapes';
-import { computeTooltipPosition } from '../utils/placement';
 import { Tooltip } from './Tooltip';
-import { isReduceMotionEnabled } from '../utils/accessibility';
-import type { TooltipRenderProps, TooltipRenderer } from '../core/types';
 
 /**
  * Wrapper component to safely render custom tooltips with hooks

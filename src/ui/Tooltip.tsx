@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+
 import {
   Pressable,
   StyleSheet,
@@ -8,12 +9,13 @@ import {
   AccessibilityInfo,
   Platform,
 } from 'react-native';
+
+import type { TooltipProps } from '../core/types';
 import {
   announce,
   formatStepAnnouncement,
   getButtonLabel,
 } from '../utils/accessibility';
-import type { TooltipProps } from '../core/types';
 
 /**
  * A tooltip component that displays step-by-step guidance in a coachmark tour.

@@ -1,4 +1,5 @@
 import { Platform, StatusBar } from 'react-native';
+
 import type { Rect } from '../core/types';
 
 /**

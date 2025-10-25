@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import {
   Text,
   View,
@@ -7,14 +8,16 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
+
 import {
   CoachmarkAnchor,
   useCoachmark,
   createTour,
 } from '@edwardloopez/react-native-coachmark';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import type { RootStackParamList } from '../navigation/types';
 import { storage } from '../utils/const';
 

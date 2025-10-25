@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useMemo, useEffect } from 'react';
+
+import { memoryStorage } from './storage';
+import { useCoachmarkStore } from './store';
 import { defaultTheme } from './theme';
 import type { CoachmarkTheme, Plugin, StorageAdapter } from './types';
-import { useCoachmarkStore } from './store';
-import { memoryStorage } from './storage';
 
 export type CoachmarkContextValue = ReturnType<typeof useCoachmarkStore> & {
   theme: CoachmarkTheme;
