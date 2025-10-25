@@ -6,7 +6,7 @@ import Animated, { useAnimatedProps } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 
-import type { Rect, SpotlightShape } from '../core/types';
+import type { Rect, SpotlightShape } from '@core/types';
 
 import { pathForCircle, pathForRect, pathForPill } from './shapes';
 

@@ -1,7 +1,7 @@
 import { renderHook, act, waitFor } from '@testing-library/react-native';
 
-import { useCoachmarkStore } from '../core/store';
-import type { Tour, AnchorRegistration, Plugin } from '../core/types';
+import { useCoachmarkStore } from '@core/store';
+import type { Tour, AnchorRegistration, Plugin } from '@core/types';
 
 const mockStorage = {
   get: jest.fn(),

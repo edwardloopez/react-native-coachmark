@@ -2,10 +2,7 @@ import { Text } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
-import {
-  CoachmarkProvider,
-  useCoachmarkContext,
-} from '../core/CoachmarkContext';
+import { CoachmarkProvider, useCoachmarkContext } from '@core/CoachmarkContext';
 
 describe('CoachmarkProvider', () => {
   it('should render children', () => {

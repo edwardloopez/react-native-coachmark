@@ -2,8 +2,9 @@ import { Text, View } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { CoachmarkAnchor } from '../anchors/CoachmarkAnchor';
-import { CoachmarkProvider } from '../core/CoachmarkContext';
+import { CoachmarkProvider } from '@core/CoachmarkContext';
+
+import { CoachmarkAnchor } from '@anchors/CoachmarkAnchor';
 
 describe('CoachmarkAnchor', () => {
   it('should render children', () => {

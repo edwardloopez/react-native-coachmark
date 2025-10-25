@@ -1,5 +1,5 @@
-import { useCoachmarkContext } from '../core/CoachmarkContext';
-import type { Tour, TourStep } from '../core/types';
+import { useCoachmarkContext } from '@core/CoachmarkContext';
+import type { Tour, TourStep } from '@core/types';
 
 /**
  * Hook that provides access to the coachmark/tour functionality.
