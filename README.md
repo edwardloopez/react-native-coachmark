@@ -241,6 +241,23 @@ const tour = createTour(
 | `delay` | number | 0 | Delay before tour starts (milliseconds) |
 | `renderTooltip` | React.ComponentType | - | Global custom tooltip renderer for all steps |
 
+---
+
+## 🚀 Try it now
+
+<p align="center">
+  <strong>Scan with Expo Go to try on your device:</strong><br/>
+  <br/>
+  <a href="https://snack.expo.dev/@edwardloopez/react-native-coachmark-demo">
+    <img src=".github/assets/expo-snack.png" alt="Scan QR with Expo Go" width="200" />
+  </a>
+  <br/>
+  <strong style="margin-top: 8px; display: inline-block;">OR</strong><br/>
+  <a href="https://snack.expo.dev/@edwardloopez/react-native-coachmark-demo" style="margin-top: 8px; display: inline-block;">View on Expo!</a>
+</p>
+
+---
+
 ## 📚 Next Steps
 
 Explore advanced features and best practices:
