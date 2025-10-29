@@ -10,7 +10,7 @@ export type CoachmarkContextValue = ReturnType<typeof useCoachmarkStore> & {
   storage: StorageAdapter;
 };
 
-const Ctx = createContext<CoachmarkContextValue>(null as any);
+const Ctx = createContext<CoachmarkContextValue | undefined>(undefined);
 
 export const CoachmarkProvider: React.FC<{
   children: React.ReactNode;
@@ -43,4 +43,19 @@ export const CoachmarkProvider: React.FC<{
   );
 };
 
-export const useCoachmarkContext = () => useContext(Ctx);
+/**
+ * Hook to access the coachmark context
+ * @throws Error if used outside of CoachmarkProvider
+ */
+export const useCoachmarkContext = (): CoachmarkContextValue => {
+  const context = useContext(Ctx);
+
+  if (!context) {
+    throw new Error(
+      'useCoachmarkContext must be used within a CoachmarkProvider. ' +
+        'Make sure your component is wrapped with <CoachmarkProvider>.'
+    );
+  }
+
+  return context;
+};
