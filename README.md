@@ -9,6 +9,8 @@
   <a href="https://www.npmjs.com/package/@edwardloopez/react-native-coachmark"><img src="https://img.shields.io/npm/v/@edwardloopez/react-native-coachmark.svg" alt="npm version" /></a>
   <a href="https://bundlephobia.com/package/@edwardloopez/react-native-coachmark"><img src="https://img.shields.io/bundlephobia/minzip/@edwardloopez/react-native-coachmark" alt="Bundle Size" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+  <a href="https://www.npmjs.com/package/@edwardloopez/react-native-coachmark"><img src="https://img.shields.io/npm/dm/@edwardloopez/react-native-coachmark.svg" alt="Downloads (monthly)" /></a>
+  <a href="https://www.npmjs.com/package/@edwardloopez/react-native-coachmark"><img src="https://img.shields.io/npm/dt/@edwardloopez/react-native-coachmark.svg" alt="Downloads (total)" /></a>
 </p>
 
 <p align="center">
