@@ -1,5 +1,11 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.5.1
+
+### Patch Changes
+
+- [#14](https://github.com/edwardloopez/react-native-coachmark/pull/14) [`6dc7838`](https://github.com/edwardloopez/react-native-coachmark/commit/6dc7838428542db00d364044dc0cebeede02c59d) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Clean up keywords in package.json for clarity
+
 ## 0.5.0
 
 ### Minor Changes
