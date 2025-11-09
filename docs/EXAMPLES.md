@@ -332,3 +332,238 @@ function ThemeDemo() {
   );
 }
 ```
+## Example 4: Multiple Tours in One App
+
+Manage different tours for different user flows (onboarding, feature discovery, etc).
+
+```tsx
+import { useEffect, useState } from 'react';
+import { View, Text, Button, ScrollView } from 'react-native';
+import {
+  CoachmarkProvider,
+  CoachmarkAnchor,
+  CoachmarkOverlay,
+  createTour,
+  useCoachmark,
+} from '@edwardloopez/react-native-coachmark';
+
+function MainApp() {
+  const [userType, setUserType] = useState<'new' | 'returning'>('new');
+  const { start, isActive } = useCoachmark();
+
+  // Tour 1: First-time user onboarding
+  const onboardingTour = createTour('onboarding-new-user', [
+    {
+      id: 'welcome-banner',
+      title: '🎉 Welcome!',
+      description: 'This is your new dashboard. Let\'s explore key features.',
+      placement: 'bottom',
+      shape: 'rect',
+    },
+    {
+      id: 'main-actions',
+      title: 'Main Actions',
+      description: 'Create, edit, or view your content here',
+      placement: 'top',
+      shape: 'rect',
+      radius: 12,
+    },
+    {
+      id: 'profile-menu',
+      title: 'Your Profile',
+      description: 'Access settings, preferences, and account info',
+      placement: 'bottom',
+      shape: 'circle',
+      padding: 16,
+    },
+  ], {
+    delay: 500,
+    showOnce: true, // Only show once per user
+  });
+
+  // Tour 2: Feature discovery for returning users
+  const featureDiscoveryTour = createTour('feature-discovery', [
+    {
+      id: 'new-feature-badge',
+      title: '✨ New Feature!',
+      description: 'We\'ve added a powerful new search capability',
+      placement: 'bottom',
+    },
+    {
+      id: 'search-bar',
+      title: 'Advanced Search',
+      description: 'Find anything instantly with smart filters',
+      placement: 'bottom',
+      autoFocus: 'ifNeeded',
+    },
+  ], {
+    delay: 2000,
+    showOnce: true,
+  });
+
+  // Tour 3: Quick tips (can be triggered manually)
+  const quickTipsTour = createTour('quick-tips', [
+    {
+      id: 'bulk-actions',
+      title: 'Pro Tip: Bulk Actions',
+      description: 'Select multiple items with checkboxes, then act on all at once',
+      placement: 'top',
+      onEnter: () => console.log('Tip viewed: Bulk Actions'),
+    },
+    {
+      id: 'keyboard-shortcuts',
+      title: 'Pro Tip: Shortcuts',
+      description: 'Press ? to see all keyboard shortcuts',
+      placement: 'bottom',
+    },
+  ]);
+
+  useEffect(() => {
+    // Auto-start appropriate tour based on user type
+    if (!isActive) {
+      if (userType === 'new') {
+        start(onboardingTour);
+      } else {
+        start(featureDiscoveryTour);
+      }
+    }
+  }, [userType]);
+
+  const handleStartTips = () => {
+    start(quickTipsTour);
+  };
+
+  const toggleUserType = () => {
+    setUserType(userType === 'new' ? 'returning' : 'new');
+  };
+
+  return (
+    <ScrollView style={{ flex: 1, backgroundColor: '#f5f5f5' }}>
+      <View style={{ padding: 20 }}>
+        {/* Welcome Banner */}
+        <CoachmarkAnchor id="welcome-banner">
+          <View style={{
+            backgroundColor: '#007AFF',
+            borderRadius: 12,
+            padding: 20,
+            marginBottom: 20,
+          }}>
+            <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
+              Welcome, User!
+            </Text>
+            <Text style={{ color: '#fff', marginTop: 8 }}>
+              {userType === 'new' ? 'First time here? Let\'s get started!' : 'Welcome back!'}
+            </Text>
+          </View>
+        </CoachmarkAnchor>
+
+        {/* Main Actions */}
+        <CoachmarkAnchor id="main-actions">
+          <View style={{
+            flexDirection: 'row',
+            gap: 12,
+            marginBottom: 20,
+          }}>
+            <Button title="Create" color="#34C759" />
+            <Button title="Edit" color="#FF9500" />
+            <Button title="View" color="#5856D6" />
+          </View>
+        </CoachmarkAnchor>
+
+        {/* New Feature Badge */}
+        <CoachmarkAnchor id="new-feature-badge">
+          <View style={{
+            backgroundColor: '#fff',
+            borderLeftWidth: 4,
+            borderLeftColor: '#34C759',
+            padding: 16,
+            marginBottom: 20,
+            borderRadius: 8,
+          }}>
+            <Text style={{ fontSize: 14, fontWeight: '600', marginBottom: 4 }}>
+              ✨ New: Advanced Search
+            </Text>
+            <Text style={{ fontSize: 12, color: '#666' }}>
+              Discover the new search feature
+            </Text>
+          </View>
+        </CoachmarkAnchor>
+
+        {/* Search Bar */}
+        <CoachmarkAnchor id="search-bar">
+          <View style={{
+            backgroundColor: '#fff',
+            borderRadius: 8,
+            padding: 12,
+            marginBottom: 20,
+            borderWidth: 1,
+            borderColor: '#ddd',
+          }}>
+            <Text style={{ color: '#999' }}>🔍 Search everything...</Text>
+          </View>
+        </CoachmarkAnchor>
+
+        {/* Bulk Actions Section */}
+        <CoachmarkAnchor id="bulk-actions">
+          <View style={{
+            backgroundColor: '#fff',
+            padding: 16,
+            borderRadius: 8,
+            marginBottom: 20,
+          }}>
+            <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8 }}>
+              Select Multiple Items
+            </Text>
+            <View style={{ flexDirection: 'row', gap: 8 }}>
+              <Text>☐ Item 1</Text>
+              <Text>☐ Item 2</Text>
+              <Text>☐ Item 3</Text>
+            </View>
+          </View>
+        </CoachmarkAnchor>
+
+        {/* Keyboard Shortcuts Info */}
+        <CoachmarkAnchor id="keyboard-shortcuts">
+          <View style={{
+            backgroundColor: '#f9f9f9',
+            padding: 12,
+            borderRadius: 8,
+            marginBottom: 20,
+          }}>
+            <Text style={{ fontSize: 12, color: '#666' }}>
+              💡 Press ? anywhere to view keyboard shortcuts
+            </Text>
+          </View>
+        </CoachmarkAnchor>
+
+        {/* Action Buttons */}
+        <CoachmarkAnchor id="profile-menu">
+          <View style={{
+            backgroundColor: '#fff',
+            padding: 12,
+            borderRadius: 8,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            marginBottom: 20,
+          }}>
+            <Button
+              title="Quick Tips"
+              color="#007AFF"
+              onPress={handleStartTips}
+            />
+            <Button
+              title={`Switch to ${userType === 'new' ? 'Returning' : 'New'} User`}
+              color="#666"
+              onPress={toggleUserType}
+            />
+          </View>
+        </CoachmarkAnchor>
+      </View>
+
+      <CoachmarkOverlay />
+    </ScrollView>
+  );
+}
+
+export default MainApp;
+```
