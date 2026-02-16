@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- Fix Android vertical offset when using navigation buttons instead of gestures
+- [#19](https://github.com/edwardloopez/react-native-coachmark/pull/19) [`f1cf1fd`](https://github.com/edwardloopez/react-native-coachmark/commit/f1cf1fd) Thanks [@christian-jayme](https://github.com/christian-jayme)! - Fix Android vertical offset when using navigation buttons instead of gestures. Modal now uses statusBarTranslucent and screen dimensions on Android to align coachmark holes correctly with target elements.
 
 ## 0.5.1
 
