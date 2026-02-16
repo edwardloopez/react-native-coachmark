@@ -6,6 +6,7 @@ import {
   Pressable,
   StyleSheet,
   type LayoutChangeEvent,
+  Platform,
 } from 'react-native';
 
 import Animated, {
@@ -62,7 +63,10 @@ export const CoachmarkOverlay: React.FC = () => {
   const holeWidth = useSharedValue(1);
   const holeHeight = useSharedValue(1);
 
-  const { width: W, height: H } = Dimensions.get('window');
+  const { width: W, height: H } =
+    Platform.OS === 'android'
+      ? Dimensions.get('screen') // includes status bar area
+      : Dimensions.get('window');
   const activeStep = state.activeTour?.steps[state.index];
 
   useEffect(() => {
@@ -143,7 +147,12 @@ export const CoachmarkOverlay: React.FC = () => {
     activeStep.renderTooltip || state.activeTour?.renderTooltip;
 
   return (
-    <Modal transparent visible animationType="none">
+    <Modal
+      transparent
+      visible
+      animationType="none"
+      statusBarTranslucent={Platform.OS === 'android'}
+    >
       <Animated.View style={[StyleSheet.absoluteFill, aStyle]}>
         <AnimatedMask
           width={W}
