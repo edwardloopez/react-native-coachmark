@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@edwardloopez/react-native-coachmark": "0.5.1"
+  },
+  "changesets": [
+    "plain-jokes-roll"
+  ]
+}

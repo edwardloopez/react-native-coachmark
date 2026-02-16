@@ -1,5 +1,11 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.5.2-beta.0
+
+### Patch Changes
+
+- Fix Android vertical offset when using navigation buttons instead of gestures
+
 ## 0.5.1
 
 ### Patch Changes
