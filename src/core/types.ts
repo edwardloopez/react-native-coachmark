@@ -47,6 +47,7 @@ export type TourStep = {
   onExit?: () => void;
   // Custom tooltip renderer
   renderTooltip?: TooltipRenderer;
+  skipMeasurement?: boolean;
 };
 
 export type Tour = {

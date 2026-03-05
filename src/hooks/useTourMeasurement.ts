@@ -5,7 +5,7 @@ import { Dimensions } from 'react-native';
 import { withTiming, Easing } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 
-import type { TourStep } from '../core/types';
+import type { CoachmarkState, Rect, TourStep } from '../core/types';
 import { inset } from '../ui/shapes';
 import { isRectVisible } from '../utils/autoScroll';
 import { measureInWindowByRef } from '../utils/measure';
@@ -25,6 +25,7 @@ type UseTourMeasurementParams = {
   holeY: SharedValue<number>;
   holeWidth: SharedValue<number>;
   holeHeight: SharedValue<number>;
+  state: CoachmarkState;
 };
 
 type MeasurementResult = {
@@ -52,6 +53,7 @@ type MeasurementResult = {
  * @param holeY - Reanimated shared value for the y-coordinate of the highlight hole
  * @param holeWidth - Reanimated shared value for the width of the highlight hole
  * @param holeHeight - Reanimated shared value for the height of the highlight hole
+ * @param state - The current state of the coachmark
  *
  * @returns Object containing the measured target rectangle, hole shape configuration, hole radius, and a remeasure function
  *
@@ -86,7 +88,11 @@ export function useTourMeasurement({
   holeY,
   holeWidth,
   holeHeight,
+  state,
 }: UseTourMeasurementParams) {
+  const preMeasuredRect = activeStep?.skipMeasurement
+    ? state.measured[activeStep.id]
+    : undefined;
   const [result, setResult] = useState<MeasurementResult>({
     targetRect: null,
     holeShape: 'rect',
@@ -94,6 +100,16 @@ export function useTourMeasurement({
   });
 
   const { width: W, height: H } = Dimensions.get('window');
+
+  const measureRect = useCallback(
+    async (ref: any, stepId: string): Promise<Rect> => {
+      if (preMeasuredRect) return preMeasuredRect;
+      const measured = await measureInWindowByRef(ref);
+      setMeasured(stepId, measured);
+      return measured;
+    },
+    [preMeasuredRect, setMeasured]
+  );
 
   const remeasure = useCallback(async () => {
     if (!activeStep) return;
@@ -132,7 +148,8 @@ export function useTourMeasurement({
         const padding = activeStep.scrollPadding ?? 20;
         const force = autoFocus === 'always';
 
-        const rect = await measureInWindowByRef(ref);
+        const rect = await measureRect(ref, activeStep.id);
+
         const { isVisible } = isRectVisible(rect, padding);
 
         if (!isVisible || force) {
@@ -161,9 +178,8 @@ export function useTourMeasurement({
       }
     }
 
-    const rect = await measureInWindowByRef(ref);
+    const rect = await measureRect(ref, activeStep.id);
     const padded = inset(rect, anchor.padding ?? 10);
-    setMeasured(activeStep.id, rect);
 
     const shape = anchor.shape ?? activeStep.shape ?? 'rect';
     const radius = anchor.radius ?? activeStep.radius ?? 12;
@@ -186,14 +202,14 @@ export function useTourMeasurement({
   }, [
     activeStep,
     getAnchor,
-    next,
-    setMeasured,
     reduceMotion,
     durationMs,
     holeX,
     holeY,
     holeWidth,
     holeHeight,
+    next,
+    measureRect,
     H,
   ]);
 
