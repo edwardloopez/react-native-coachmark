@@ -45,7 +45,6 @@ export type TourStep = {
   onBeforeEnter?: () => Promise<boolean | void>;
   onEnter?: () => void;
   onExit?: () => void;
-  // Custom tooltip renderer
   renderTooltip?: TooltipRenderer;
 };
 
