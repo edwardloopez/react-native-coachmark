@@ -79,4 +79,13 @@ describe('createTour', () => {
     expect(tour.key).toBe('test-tour');
     expect(tour.steps).toEqual(mockSteps);
   });
+
+  it('should create a tour with renderTooltip option', () => {
+    const mockRenderer = jest.fn();
+    const tour = createTour('test-tour', mockSteps, {
+      renderTooltip: mockRenderer,
+    });
+
+    expect(tour.renderTooltip).toBe(mockRenderer);
+  });
 });

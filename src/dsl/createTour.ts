@@ -1,4 +1,4 @@
-import type { Tour, TourStep } from '../core/types';
+import type { Tour, TourStep, TooltipRenderer } from '../core/types';
 
 /**
  * Creates a tour configuration object with the specified steps and options.
@@ -8,6 +8,7 @@ import type { Tour, TourStep } from '../core/types';
  * @param opts - Optional configuration options for the tour
  * @param opts.showOnce - If true, the tour will only be shown once to the user
  * @param opts.delay - Delay in milliseconds before the tour starts
+ * @param opts.renderTooltip - Global custom tooltip renderer for all steps
  * @returns A Tour object containing the key, steps, and optional configuration
  *
  * @example
@@ -22,7 +23,13 @@ import type { Tour, TourStep } from '../core/types';
 export function createTour(
   key: string,
   steps: TourStep[],
-  opts?: { showOnce?: boolean; delay?: number }
+  opts?: { showOnce?: boolean; delay?: number; renderTooltip?: TooltipRenderer }
 ): Tour {
-  return { key, steps, showOnce: opts?.showOnce, delay: opts?.delay };
+  return {
+    key,
+    steps,
+    showOnce: opts?.showOnce,
+    delay: opts?.delay,
+    renderTooltip: opts?.renderTooltip,
+  };
 }
