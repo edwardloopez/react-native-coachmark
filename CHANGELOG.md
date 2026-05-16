@@ -1,5 +1,13 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.5.3
+
+### Patch Changes
+
+- [#29](https://github.com/edwardloopez/react-native-coachmark/pull/29) [`73445c8`](https://github.com/edwardloopez/react-native-coachmark/commit/73445c8a4ae59f703d593b6d1ff04615f004284a) Thanks [@edwardloopez](https://github.com/edwardloopez)! - fix(android): avoid invalid SVG path when circle hole has negative dimensions
+
+- [#26](https://github.com/edwardloopez/react-native-coachmark/pull/26) [`fdf324c`](https://github.com/edwardloopez/react-native-coachmark/commit/fdf324ce283bb4acee2ba4ef82504c6a357c747d) Thanks [@edwardloopez](https://github.com/edwardloopez)! - fix: expose `renderTooltip` option in `createTour` DSL
+
 ## 0.5.2
 
 ### Patch Changes
