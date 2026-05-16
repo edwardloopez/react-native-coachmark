@@ -42,7 +42,7 @@ export function inset(rect: Rect, pad: number): Rect {
 export function pathForCircle(rect: Rect): string {
   const cx = rect.x + rect.width / 2;
   const cy = rect.y + rect.height / 2;
-  const r = Math.max(rect.width, rect.height) / 2;
+  const r = Math.abs(Math.max(rect.width, rect.height) / 2);
   return `M ${cx} ${cy} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0`;
 }
 
