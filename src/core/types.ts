@@ -46,6 +46,7 @@ export type TourStep = {
   onEnter?: () => void;
   onExit?: () => void;
   renderTooltip?: TooltipRenderer;
+  skipMeasurement?: boolean;
 };
 
 export type Tour = {

@@ -93,6 +93,7 @@ export const CoachmarkOverlay: React.FC = () => {
     holeY,
     holeWidth,
     holeHeight,
+    state,
   });
 
   const tooltipPos = useTooltipPosition({
