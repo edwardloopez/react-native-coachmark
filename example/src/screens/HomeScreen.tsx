@@ -84,6 +84,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             shape: 'rect',
             radius: 16,
             placement: 'top',
+            nextOnBackdropPress: false,
           },
         ],
         { showOnce: true }

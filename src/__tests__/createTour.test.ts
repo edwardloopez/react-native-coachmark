@@ -88,4 +88,12 @@ describe('createTour', () => {
 
     expect(tour.renderTooltip).toBe(mockRenderer);
   });
+
+  it('should create a tour with nextOnBackdropPress option', () => {
+    const tour = createTour('test-tour', mockSteps, {
+      nextOnBackdropPress: false,
+    });
+
+    expect(tour.nextOnBackdropPress).toBe(false);
+  });
 });
