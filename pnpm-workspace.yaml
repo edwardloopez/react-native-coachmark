@@ -1,4 +1,47 @@
-# Disabled - using direct file reference instead
-# packages:
-#   - '.'
-#   - 'example'
+packages:
+  - '.'
+  - 'example'
+
+# React Native compatibility (migrated from .npmrc for pnpm 11+)
+# @see https://pnpm.io/migration
+hoist: true
+shamefullyHoist: true
+strictPeerDependencies: false
+autoInstallPeers: true
+nodeLinker: hoisted
+
+overrides:
+  react-native-worklets: 0.5.1
+
+# npm security best practices
+# Source: https://github.com/lirantal/npm-security-best-practices
+
+# SECURITY: block packages newer than 7 days (10080 minutes)
+minimumReleaseAge: 10080
+
+# Allow instant upgrades for common tooling packages
+minimumReleaseAgeExclude:
+  - '@types/react'
+  - '@types/jest'
+  - typescript
+
+# SECURITY: reject a version whose publishing trust signals regressed
+trustPolicy: no-downgrade
+
+# Older packages may pre-date provenance support
+trustPolicyIgnoreAfter: 43200
+
+# Known packages where trust metadata regressed without malicious intent
+trustPolicyExclude:
+  - 'chokidar@4.0.3'
+
+# SECURITY: reject transitive dependencies sourced from git URLs or tarballs
+blockExoticSubdeps: true
+
+# SECURITY: fail the install if a dependency wants to run a build script
+# that isn't in the allow-list below
+strictDepBuilds: true
+
+# SECURITY: pnpm blocks install scripts by default, enabled explicitly for:
+allowBuilds:
+  '@evilmartians/lefthook': true

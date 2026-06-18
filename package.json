@@ -13,11 +13,6 @@
     "./src": "./src/index.tsx",
     "./package.json": "./package.json"
   },
-  "pnpm": {
-    "overrides": {
-      "react-native-worklets": "0.5.1"
-    }
-  },
   "files": [
     "src",
     "lib",
@@ -38,7 +33,11 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "pnpm --filter react-native-coachmark-example",
+    "example:start": "pnpm --filter react-native-coachmark-example start",
+    "example:android": "pnpm --filter react-native-coachmark-example android",
+    "example:ios": "pnpm --filter react-native-coachmark-example ios",
+    "lint:lockfile": "node scripts/validate-lockfile.mjs",
+    "audit:deps": "pnpm audit --audit-level=moderate",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "typecheck": "tsc",
@@ -115,7 +114,7 @@
       "optional": false
     }
   },
-  "packageManager": "pnpm@9.15.1",
+  "packageManager": "pnpm@11.8.0",
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
