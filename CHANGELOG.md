@@ -1,5 +1,15 @@
 # @edwardloopez/react-native-coachmark
 
+## 0.5.4
+
+### Patch Changes
+
+- [#34](https://github.com/edwardloopez/react-native-coachmark/pull/34) [`8f93f65`](https://github.com/edwardloopez/react-native-coachmark/commit/8f93f658f055cc8fbee0e8c9c5923672c9b1d1aa) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Upgrade pnpm to v11, add Dependabot, CI security checks, and supply chain hardening policies
+
+- [#41](https://github.com/edwardloopez/react-native-coachmark/pull/41) [`13c1452`](https://github.com/edwardloopez/react-native-coachmark/commit/13c1452af01ae36f8f25d8cb85351b961e50e7b4) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Enable npm publish provenance via publishConfig for pnpm 11 compatibility
+
+- [#31](https://github.com/edwardloopez/react-native-coachmark/pull/31) [`7ffebf6`](https://github.com/edwardloopez/react-native-coachmark/commit/7ffebf6469bf0ed557426cc7fa7ff82e587670c7) Thanks [@edwardloopez](https://github.com/edwardloopez)! - Add nextOnBackdropPress option to Tour and TourStep to prevent backdrop taps from advancing the tour (defaults to true)
+
 ## 0.5.3
 
 ### Patch Changes
