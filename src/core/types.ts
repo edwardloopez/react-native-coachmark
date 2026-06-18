@@ -46,6 +46,7 @@ export type TourStep = {
   onEnter?: () => void;
   onExit?: () => void;
   renderTooltip?: TooltipRenderer;
+  nextOnBackdropPress?: boolean;
 };
 
 export type Tour = {
@@ -54,6 +55,7 @@ export type Tour = {
   showOnce?: boolean;
   delay?: number;
   renderTooltip?: TooltipRenderer;
+  nextOnBackdropPress?: boolean;
 };
 
 export type CoachmarkTheme = {

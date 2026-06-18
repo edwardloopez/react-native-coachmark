@@ -233,6 +233,7 @@ const tour = createTour(
 | `onEnter` | function | - | Callback when step becomes active |
 | `onExit` | function | - | Callback when leaving step |
 | `renderTooltip` | React.ComponentType | - | Custom tooltip component for this step |
+| `nextOnBackdropPress` | boolean | `true` | If `false`, tapping the backdrop won't advance the tour |
 
 **Tour Options:**
 
@@ -241,6 +242,7 @@ const tour = createTour(
 | `showOnce` | boolean | false | Show tour only once (requires storage) |
 | `delay` | number | 0 | Delay before tour starts (milliseconds) |
 | `renderTooltip` | React.ComponentType | - | Global custom tooltip renderer for all steps |
+| `nextOnBackdropPress` | boolean | `true` | If `false`, tapping the backdrop won't advance the tour |
 
 ---
 

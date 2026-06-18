@@ -21,6 +21,7 @@ import { useOrientationChange } from '../hooks/useOrientationChange';
 import { useTooltipPosition } from '../hooks/useTooltipPosition';
 import { useTourMeasurement } from '../hooks/useTourMeasurement';
 import { isReduceMotionEnabled } from '../utils/accessibility';
+import { resolveNextOnBackdropPress } from '../utils/resolveNextOnBackdropPress';
 
 import { CoachmarkErrorBoundary } from './CoachmarkErrorBoundary';
 import { AnimatedMask } from './Mask';
@@ -146,6 +147,11 @@ export const CoachmarkOverlay: React.FC = () => {
   const customRenderer =
     activeStep.renderTooltip || state.activeTour?.renderTooltip;
 
+  const nextOnBackdropPress = resolveNextOnBackdropPress(
+    activeStep,
+    state.activeTour
+  );
+
   return (
     <Modal
       transparent
@@ -171,7 +177,10 @@ export const CoachmarkOverlay: React.FC = () => {
           backdropOpacity={theme.backdropOpacity}
         />
 
-        <Pressable style={StyleSheet.absoluteFill} onPress={next} />
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={nextOnBackdropPress ? next : undefined}
+        />
 
         <Animated.View
           style={[

@@ -9,6 +9,7 @@ import type { Tour, TourStep, TooltipRenderer } from '../core/types';
  * @param opts.showOnce - If true, the tour will only be shown once to the user
  * @param opts.delay - Delay in milliseconds before the tour starts
  * @param opts.renderTooltip - Global custom tooltip renderer for all steps
+ * @param opts.nextOnBackdropPress - If false, tapping the backdrop won't call next
  * @returns A Tour object containing the key, steps, and optional configuration
  *
  * @example
@@ -23,7 +24,12 @@ import type { Tour, TourStep, TooltipRenderer } from '../core/types';
 export function createTour(
   key: string,
   steps: TourStep[],
-  opts?: { showOnce?: boolean; delay?: number; renderTooltip?: TooltipRenderer }
+  opts?: {
+    showOnce?: boolean;
+    delay?: number;
+    renderTooltip?: TooltipRenderer;
+    nextOnBackdropPress?: boolean;
+  }
 ): Tour {
   return {
     key,
@@ -31,5 +37,6 @@ export function createTour(
     showOnce: opts?.showOnce,
     delay: opts?.delay,
     renderTooltip: opts?.renderTooltip,
+    nextOnBackdropPress: opts?.nextOnBackdropPress,
   };
 }

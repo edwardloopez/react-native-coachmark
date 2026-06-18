@@ -416,7 +416,9 @@ function MainApp() {
       description: 'Press ? to see all keyboard shortcuts',
       placement: 'bottom',
     },
-  ]);
+  ], {
+    nextOnBackdropPress: false, // Require explicit Next button
+  });
 
   useEffect(() => {
     // Auto-start appropriate tour based on user type
