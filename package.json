@@ -70,7 +70,8 @@
   "homepage": "https://github.com/edwardloopez/react-native-coachmark#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
