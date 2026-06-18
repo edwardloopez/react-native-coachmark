@@ -2,6 +2,7 @@
 # Source: https://github.com/lirantal/npm-security-best-practices
 version: 2
 updates:
+  # Library root: devDependencies only (grouped weekly PR)
   - package-ecosystem: npm
     directory: /
     schedule:
@@ -16,6 +17,26 @@ updates:
         dependency-type: development
         patterns:
           - '*'
+
+  # Example app: Expo/RN packages are pinned to the SDK — update with `npx expo install`
+  - package-ecosystem: npm
+    directory: /example
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 3
+    ignore:
+      - dependency-name: 'expo'
+      - dependency-name: 'expo-*'
+      - dependency-name: '@expo/*'
+      - dependency-name: 'react'
+      - dependency-name: 'react-dom'
+      - dependency-name: 'react-native'
+      - dependency-name: 'react-native-*'
+      - dependency-name: 'react-native-web'
+      - dependency-name: '@react-native/*'
+      - dependency-name: '@react-navigation/*'
 
   - package-ecosystem: github-actions
     directory: /
