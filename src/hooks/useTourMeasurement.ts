@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 import { Dimensions } from 'react-native';
 
@@ -10,6 +10,10 @@ import { inset } from '../ui/shapes';
 import { isRectVisible } from '../utils/autoScroll';
 import { measureInWindowByRef } from '../utils/measure';
 
+// Anchors often register a few frames after their step starts
+const ANCHOR_RETRY_MS = 50;
+const ANCHOR_TIMEOUT_MS = 2000;
+
 type AnchorGetter = (id: string) => any;
 
 type UseTourMeasurementParams = {
@@ -19,6 +23,7 @@ type UseTourMeasurementParams = {
   getAnchor: AnchorGetter;
   setMeasured: (id: string, rect: any) => void;
   next: () => void;
+  onAnchorMissing?: () => void;
   reduceMotion: boolean;
   durationMs: number;
   holeX: SharedValue<number>;
@@ -46,6 +51,7 @@ type MeasurementResult = {
  * @param getAnchor - Function to retrieve an anchor element by its ID
  * @param setMeasured - Callback to store measured dimensions for a step
  * @param next - Function to proceed to the next step in the tour
+ * @param onAnchorMissing - Called when a step's anchor can't be found and the tour has nothing on screen yet
  * @param reduceMotion - Whether to disable animations for accessibility
  * @param durationMs - Duration in milliseconds for hole animations
  * @param holeX - Reanimated shared value for the x-coordinate of the highlight hole
@@ -53,7 +59,7 @@ type MeasurementResult = {
  * @param holeWidth - Reanimated shared value for the width of the highlight hole
  * @param holeHeight - Reanimated shared value for the height of the highlight hole
  *
- * @returns Object containing the measured target rectangle, hole shape configuration, hole radius, and a remeasure function
+ * @returns Object containing the measured target rectangle, hole shape configuration, hole radius, whether the step's anchor is mounted, and a remeasure function
  *
  * @example
  * ```typescript
@@ -80,6 +86,7 @@ export function useTourMeasurement({
   getAnchor,
   setMeasured,
   next,
+  onAnchorMissing,
   reduceMotion,
   durationMs,
   holeX,
@@ -92,29 +99,60 @@ export function useTourMeasurement({
     holeShape: 'rect',
     holeRadius: 12,
   });
+  const [hasAnchor, setHasAnchor] = useState(false);
+  const measureRun = useRef(0);
 
   const { width: W, height: H } = Dimensions.get('window');
 
   const remeasure = useCallback(async () => {
     if (!activeStep) return;
 
+    const run = (measureRun.current += 1);
+    const isStale = () => run !== measureRun.current;
+
+    const readAnchorRef = () => {
+      if (isStale()) return null;
+      const ref = getAnchor(activeStep.id)?.getRef();
+      setHasAnchor(!!ref);
+      return ref;
+    };
+
+    // Fresh ref each time: RN never calls back for an unmounted view
+    const measureAnchor = async () => {
+      const ref = readAnchorRef();
+      const rect = ref && (await measureInWindowByRef(ref));
+      return rect && readAnchorRef() ? rect : null;
+    };
+
+    const handleMissingAnchor = () => {
+      if (isStale()) return;
+      console.warn(`[Coachmark] Anchor "${activeStep.id}" not found`);
+      if (!result.targetRect) onAnchorMissing?.();
+    };
+
+    readAnchorRef();
+
     if (activeStep.onBeforeEnter) {
       const proceed = await activeStep.onBeforeEnter();
+      if (isStale()) return;
       if (proceed === false) {
         next();
         return;
       }
     }
 
-    const anchor = getAnchor(activeStep.id);
-    if (!anchor) {
-      console.warn(`[Coachmark] Anchor "${activeStep.id}" not found`);
-      return;
+    for (
+      let waited = 0;
+      !readAnchorRef() && waited < ANCHOR_TIMEOUT_MS;
+      waited += ANCHOR_RETRY_MS
+    ) {
+      await new Promise((resolve) => setTimeout(resolve, ANCHOR_RETRY_MS));
+      if (isStale()) return;
     }
 
-    const ref = anchor.getRef();
-    if (!ref) {
-      console.warn(`[Coachmark] Ref for "${activeStep.id}" is null`);
+    const anchor = getAnchor(activeStep.id);
+    if (!anchor?.getRef()) {
+      handleMissingAnchor();
       return;
     }
 
@@ -132,7 +170,12 @@ export function useTourMeasurement({
         const padding = activeStep.scrollPadding ?? 20;
         const force = autoFocus === 'always';
 
-        const rect = await measureInWindowByRef(ref);
+        const rect = await measureAnchor();
+        if (!rect) {
+          handleMissingAnchor();
+          return;
+        }
+
         const { isVisible } = isRectVisible(rect, padding);
 
         if (!isVisible || force) {
@@ -161,7 +204,12 @@ export function useTourMeasurement({
       }
     }
 
-    const rect = await measureInWindowByRef(ref);
+    const rect = await measureAnchor();
+    if (!rect) {
+      handleMissingAnchor();
+      return;
+    }
+
     const padded = inset(rect, anchor.padding ?? 10);
     setMeasured(activeStep.id, rect);
 
@@ -187,6 +235,8 @@ export function useTourMeasurement({
     activeStep,
     getAnchor,
     next,
+    onAnchorMissing,
+    result.targetRect,
     setMeasured,
     reduceMotion,
     durationMs,
@@ -209,10 +259,18 @@ export function useTourMeasurement({
 
     return () => {
       cancelled = true;
+      measureRun.current += 1;
       activeStep?.onExit?.();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, tourKey, activeStep?.id, W, H]);
 
-  return { ...result, remeasure };
+  useEffect(() => {
+    if (tourKey === undefined) {
+      setHasAnchor(false);
+      setResult((r) => (r.targetRect ? { ...r, targetRect: null } : r));
+    }
+  }, [tourKey]);
+
+  return { ...result, hasAnchor, remeasure };
 }
