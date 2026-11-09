@@ -157,7 +157,7 @@ export const CoachmarkOverlay: React.FC = () => {
       transparent
       visible
       animationType="none"
-      supportedOrientations={['portrait', 'landscape-left', 'landscape-right']}
+      supportedOrientations={['portrait', 'landscape']}
       statusBarTranslucent={Platform.OS === 'android'}
     >
       <Animated.View style={[StyleSheet.absoluteFill, aStyle]}>
