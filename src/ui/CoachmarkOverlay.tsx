@@ -70,31 +70,39 @@ export const CoachmarkOverlay: React.FC = () => {
       : Dimensions.get('window');
   const activeStep = state.activeTour?.steps[state.index];
 
+  const isLastStep = state.index === (state.activeTour?.steps.length ?? 0) - 1;
+
   useEffect(() => {
     isReduceMotionEnabled().then(setReduceMotion);
   }, []);
 
+  const handleSkip = useCallback(() => stop('skipped'), [stop]);
+
+  const { targetRect, holeShape, holeRadius, hasAnchor, remeasure } =
+    useTourMeasurement({
+      activeStep,
+      index: state.index,
+      tourKey: state.activeTour?.key,
+      getAnchor,
+      setMeasured,
+      next,
+      onAnchorMissing: isLastStep ? handleSkip : next,
+      reduceMotion,
+      durationMs: theme.motion.durationMs,
+      holeX,
+      holeY,
+      holeWidth,
+      holeHeight,
+    });
+
+  const isVisible = state.isActive && (hasAnchor || targetRect !== null);
+
   useEffect(() => {
     const duration = reduceMotion ? 0 : theme.motion.durationMs;
-    opacity.value = withTiming(state.isActive ? 1 : 0, {
+    opacity.value = withTiming(isVisible ? 1 : 0, {
       duration,
     });
-  }, [opacity, state.isActive, theme.motion.durationMs, reduceMotion]);
-
-  const { targetRect, holeShape, holeRadius, remeasure } = useTourMeasurement({
-    activeStep,
-    index: state.index,
-    tourKey: state.activeTour?.key,
-    getAnchor,
-    setMeasured,
-    next,
-    reduceMotion,
-    durationMs: theme.motion.durationMs,
-    holeX,
-    holeY,
-    holeWidth,
-    holeHeight,
-  });
+  }, [opacity, isVisible, theme.motion.durationMs, reduceMotion]);
 
   const tooltipPos = useTooltipPosition({
     targetRect,
@@ -114,8 +122,6 @@ export const CoachmarkOverlay: React.FC = () => {
     const { width, height } = e.nativeEvent.layout;
     setTooltipSize({ width, height });
   }, []);
-
-  const handleSkip = useCallback(() => stop('skipped'), [stop]);
 
   const tooltipRenderProps: TooltipRenderProps | null = useMemo(() => {
     if (!activeStep || !state.activeTour) return null;
@@ -142,7 +148,8 @@ export const CoachmarkOverlay: React.FC = () => {
     handleSkip,
   ]);
 
-  if (!state.isActive || !activeStep || !tooltipRenderProps) return null;
+  // The modal blocks every touch, so it needs something to point at
+  if (!isVisible || !activeStep || !tooltipRenderProps) return null;
 
   const customRenderer =
     activeStep.renderTooltip || state.activeTour?.renderTooltip;

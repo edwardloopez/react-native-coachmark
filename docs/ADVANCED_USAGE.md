@@ -213,6 +213,17 @@ const tour = createTour('cleanup-tour', [
 ]);
 ```
 
+### Missing Anchors
+
+A step waits up to 2 seconds for its anchor, so anchors can mount a little after the step starts. While a tour has nothing on screen and the anchor is missing, the overlay stays hidden and the app stays usable.
+
+| Case | Result |
+|------|--------|
+| Anchor mounts in time | Step shows normally |
+| Anchor never mounts, nothing on screen yet | Step is skipped: `onEnter` doesn't fire, `onExit` does |
+| Same, on the last step | Tour ends with `onFinish(tour, 'skipped')` and `showOnce` isn't saved |
+| Anchor is gone, a tooltip is already on screen | Tooltip stays until the user moves on |
+
 ## Custom Theme
 
 Customize colors, animations, and styling for your brand.
