@@ -1,6 +1,5 @@
 ---
-'@edwardloopez/react-native-coachmark': minor
+'@edwardloopez/react-native-coachmark': patch
 ---
 
-# Support landcape for iOS
-React Native Modal component by default on iOS supports "portrait" to support landscape you have to be explicit on it.
+Fix iOS coachmark Modal forcing portrait. Set `supportedOrientations` so landscape tours keep the correct orientation and highlight position.
