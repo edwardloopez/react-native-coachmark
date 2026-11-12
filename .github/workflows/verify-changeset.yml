@@ -44,15 +44,14 @@ jobs:
 
           CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
 
-          # Files that require a changeset
-          SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '^src/|^package\.json$' || true)
+          SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '^src/' | grep -vE '__tests__|\.test\.(ts|tsx)$' || true)
 
           if [ -n "$SOURCE_CHANGED" ]; then
             echo "Source files changed:"
             echo "$SOURCE_CHANGED"
             echo "needs_changeset=true" >> $GITHUB_OUTPUT
           else
-            echo "No source files changed (docs, tests, config only)"
+            echo "No library src/ changes requiring a changeset"
             echo "needs_changeset=false" >> $GITHUB_OUTPUT
           fi
 
