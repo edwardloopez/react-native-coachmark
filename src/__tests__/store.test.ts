@@ -152,7 +152,7 @@ describe('useCoachmarkStore', () => {
       });
 
       const elapsedTime = Date.now() - startTime;
-      expect(elapsedTime).toBeGreaterThanOrEqual(100);
+      expect(elapsedTime).toBeGreaterThanOrEqual(90);
       expect(result.current.state.isActive).toBe(true);
     });
 

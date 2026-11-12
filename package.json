@@ -43,6 +43,7 @@
     "clean": "del-cli lib",
     "prepare": "bob build",
     "release": "pnpm prepare && changeset publish",
+    "release:publish": "changeset publish --no-git-tag && node scripts/git-tag-release.mjs",
     "changeset": "changeset",
     "version:packages": "changeset version"
   },
@@ -68,14 +69,17 @@
     "url": "https://github.com/edwardloopez/react-native-coachmark/issues"
   },
   "homepage": "https://github.com/edwardloopez/react-native-coachmark#readme",
+  "workspaces": [
+    "."
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",
     "provenance": true
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.7",
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/compat": "^1.3.2",
     "@eslint/eslintrc": "^3.3.1",

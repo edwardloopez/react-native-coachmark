@@ -120,6 +120,18 @@ A changeset file will be created in `.changeset/`. **Commit this file with your 
 
 The CI will automatically check that a changeset is present when needed.
 
+### Release flow
+
+Publishing is gated by a **Version Packages** PR. Merging a feature PR does **not** publish to npm.
+
+| Event | Result |
+|-------|--------|
+| Merge a feature/fix PR that includes a changeset | Release workflow opens or updates the `chore: version packages` PR; **no npm publish** |
+| Merge the Version Packages PR | Bumps version, updates `CHANGELOG.md`, publishes to npm, and creates a `vX.Y.Z` git tag + GitHub Release |
+| PR that changes library `src/` (not tests) without a changeset | `verify-changeset` fails |
+
+Publish uses `release:publish` (`changeset publish --no-git-tag` + `scripts/git-tag-release.mjs`) so git tags stay `vX.Y.Z`.
+
 ### Commit message convention
 
 We follow the [conventional commits specification](https://www.conventionalcommits.org/en) for our commit messages:

@@ -28,9 +28,14 @@ jobs:
       - name: Validate lockfile sources
         run: pnpm lint:lockfile
 
-      - name: Audit dependencies
-        run: pnpm audit:deps
-        continue-on-error: true
+      - name: Audit dependencies (non-blocking)
+        run: |
+          if pnpm audit:deps; then
+            echo "Dependency audit passed"
+          else
+            echo "::warning::Dependency audit reported vulnerabilities (non-blocking). Run 'pnpm audit:deps' locally for details."
+          fi
+
 
   lint:
     runs-on: ubuntu-latest
